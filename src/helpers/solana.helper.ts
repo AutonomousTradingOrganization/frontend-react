@@ -133,6 +133,25 @@ export const initializeCounter = async (anchorWallet: AnchorWallet): Promise<str
     }
 };
 
+export const incrementCounter = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+  try {
+    const accountTransaction = await programCounter.methods.increment().transaction();
+    // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+
+    const recentBlockhash = await getRecentBlockhash();
+    if (accountTransaction && recentBlockhash) {
+        accountTransaction.feePayer = anchorWallet.publicKey;
+        accountTransaction.recentBlockhash = recentBlockhash;
+        const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+        return await connection.sendRawTransaction(signedTransaction.serialize());
+    }
+    return null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export const getAccount = async (publicKey: PublicKey): Promise<any> => {
     try {
       const accountSeed = Buffer.from("account");
