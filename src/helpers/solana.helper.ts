@@ -161,7 +161,7 @@ export const initializeHandClick = async (anchorWallet: AnchorWallet): Promise<s
 // init counter program for handclick
 export const initializeCounterHandClick = async (anchorWallet: AnchorWallet): Promise<string | null> => {
     try {
-      const accountTransaction = await getInitializeCounterHandClickTransaction(anchorWallet.publicKey);
+      const accountTransaction = await getInitializeHandClickTransaction(anchorWallet.publicKey);
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
   
       const recentBlockhash = await getRecentBlockhash();
@@ -281,7 +281,7 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
       );
       return await program.methods.initialize(data, age)
         .accounts({
-            newAccount: accountPda,
+            // newAccount: accountPda,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
@@ -294,6 +294,7 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 
 export const getInitializeHandClickTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
+        console.log(programHandClick);
       return await programHandClick.methods.initialize()
         .accounts({
             counterDataAccount: PROGRAM_ID_COUNTER_CPI,
