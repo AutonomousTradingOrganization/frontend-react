@@ -15,7 +15,10 @@ bun install
 ```
 bun run start
 ```
-
+#### Build frontend to deploy on vercel/github pages
+```
+bun run build
+```
 
 #### Update programs (submodules)
 ```
