@@ -294,7 +294,7 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 
 export const getInitializeHandClickTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
-      return await program.methods.initialize()
+      return await programHandClick.methods.initialize()
         .accounts({
             counterDataAccount: PROGRAM_ID_COUNTER_CPI,
             signer: publicKey,
