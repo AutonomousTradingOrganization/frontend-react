@@ -1,9 +1,6 @@
 [submodule "programs/hand_click"]
 	path = programs/hand_click
 	url = https://github.com/AutonomousTradingOrganization/hand_click
-[submodule "programs/counter"]
-	path = programs/counter
-	url = https://github.com/AutonomousTradingOrganization/counter
 [submodule "programs/anchor_basic_storage"]
 	path = programs/anchor_basic_storage
 	url = https://github.com/AutonomousTradingOrganization/anchor_basic_storage
