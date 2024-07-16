@@ -27,10 +27,7 @@ export const IDLHandClick = {
       "name": "CPIToCounterFailed",
       "msg": "cpi to 'counter' failed"
     }
-  ],
-  "metadata": {
-    "address": "6CCXg2Nx13yUpvDB6NkL2LhCnRNyg4H1dzhTseVqtNVQ"
-  }
+  ]
 }
 
 export const PROGRAM_ID_HAND_CLICK = new PublicKey('6CCXg2Nx13yUpvDB6NkL2LhCnRNyg4H1dzhTseVqtNVQ');
