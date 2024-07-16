@@ -3,7 +3,7 @@ import { getCounter, initializeCounter } from "../helpers/solana.helper";
 import { incrementCounter } from "../helpers/solana.helper";
 import { useState } from "react";
 
-export function Account() {
+export function Counter() {
 
     const anchorWallet = useAnchorWallet();
     const [transactionHash, setTransactionHash] = useState<string | null>(null);
