@@ -1,17 +1,17 @@
 # ATO
 
-## INSTALLATION
+### INSTALLATION
 ```
 git clone --remote-submodules --recurse-submodules https://github.com/AutonomousTradingOrganization/frontend-react
 cd frontend-react
 ```
 
-### Install dependencies
+#### Install dependencies
 ```
 bun install
 ```
 
-### Run frontend
+#### Run frontend
 ```
 bun run start
 ```
