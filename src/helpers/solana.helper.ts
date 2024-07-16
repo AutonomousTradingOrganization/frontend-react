@@ -16,6 +16,9 @@ const program = new Program<Idl>(IDL as Idl, PROGRAM_ID, {
 const programCounter = new Program<Idl>(IDLCounter as Idl, PROGRAM_ID_COUNTER, {
   connection,
 });
+const programHandClick = new Program<Idl>(IDLHandClick as Idl, PROGRAM_ID_HAND_CLICK, {
+  connection,
+});
 
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
@@ -174,7 +177,7 @@ export const handClickCounter = async (anchorWallet: AnchorWallet): Promise<stri
 
 export const getHandClickCounterTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
-      return await program.methods.hand_click()
+      return await programHandClick.methods.hand_click()
         .accounts({
             counterDataAccount: publicKey,
             signer: publicKey,
