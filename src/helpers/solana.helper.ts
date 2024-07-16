@@ -185,9 +185,7 @@ export const getHandClickCounterTransaction = async (publicKey: PublicKey): Prom
       return await programHandClick.methods.handClick()
         .accounts({
             counterDataAccount: publicKey,
-            signer: publicKey,
-            counterProgram: PROGRAM_ID_COUNTER_CPI,
-            systemProgram: SystemProgram.programId
+            counterProgram: PROGRAM_ID_COUNTER_CPI
         })
         .transaction()
       } catch (error) {
