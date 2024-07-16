@@ -177,6 +177,10 @@ export const handClickCounter = async (anchorWallet: AnchorWallet): Promise<stri
 
 export const getHandClickCounterTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
+        console.log(publicKey);
+        console.log("counter for handclick : "+PROGRAM_ID_COUNTER_CPI);
+        console.log(SystemProgram.programId);
+        console.log("handclick : "+PROGRAM_ID_HAND_CLICK);
       return await programHandClick.methods.handClick()
         .accounts({
             counterDataAccount: publicKey,
