@@ -22,10 +22,10 @@ export function HandClick() {
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
-                                    const initResult = await initializeCounter(anchorWallet);
+                                    const initResult = await handClickCounter(anchorWallet);
                                     setTransactionHash(initResult);
                                     setSendingTransaction(false);
-                                    console.log("initResult");
+                                    console.log("result handClickCounter");
                                     console.log(initResult);
                                     if(!initResult){
                                         console.log("setError");

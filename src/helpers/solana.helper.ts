@@ -135,6 +135,59 @@ export const initializeCounter = async (anchorWallet: AnchorWallet): Promise<str
     }
 };
 
+export const initializeCounterHandClick = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+    try {
+      const accountTransaction = await getInitializeCounterHandClickTransaction(anchorWallet.publicKey);
+      // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (accountTransaction && recentBlockhash) {
+          accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+export const handClickCounter = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+    try {
+      const handClickTransaction = await getHandClickCounterTransaction(anchorWallet.publicKey);
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (handClickTransaction && recentBlockhash) {
+          handClickTransaction.feePayer = anchorWallet.publicKey;
+          handClickTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(handClickTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+export const getHandClickCounterTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    try {
+      return await program.methods.handClick()
+        .accounts({
+            counterDataAccount: publicKey,
+            signer: publicKey,
+            counterProgram: PROGRAM_ID_COUNTER_CPI,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
 export const incrementCounter = async (anchorWallet: AnchorWallet): Promise<string | null> => {
   try {
     const accountTransaction = await programCounter.methods.increment().transaction();
@@ -199,6 +252,44 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
         new PublicKey(PROGRAM_ID.toString())
       );
       return await program.methods.initialize(data, age)
+        .accounts({
+            newAccount: accountPda,
+            signer: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
+export const getInitializeCounterHandClickTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    try {
+      return await program.methods.initialize()
+        .accounts({
+            counterDataAccount: PROGRAM_ID_COUNTER_CPI,
+            signer: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
+export const getHandClickTransaction = async (publicKey: PublicKey, data: BN, age: BN): Promise<Transaction | null> => {
+    try {
+      const accountSeed = Buffer.from("handClick");
+      const [accountPda] = PublicKey.findProgramAddressSync(
+        [
+          accountSeed, 
+          publicKey.toBuffer()
+        ], 
+        new PublicKey(PROGRAM_ID.toString())
+      );
+      return await program.methods.click(data, age)
         .accounts({
             newAccount: accountPda,
             signer: publicKey,
