@@ -3,6 +3,7 @@ import { Authentication } from "./Authentication";
 import { Transfer } from "./Transfer";
 import { Account } from "./Account";
 import { Counter } from "./Counter";
+import { HandClick } from "./HandClick";
 import { Swap } from "./Swap";
 
 export function Dashboard() {
@@ -21,6 +22,7 @@ export function Dashboard() {
                         <Transfer />
                         <Account />
                         <Counter />
+                        <HandClick />
                         <Swap />
                     </div>
                 ) : (
