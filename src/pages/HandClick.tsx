@@ -1,6 +1,6 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { getCounter, initializeCounter } from "../helpers/solana.helper";
-import { incrementCounter } from "../helpers/solana.helper";
+import { handClickCounter } from "../helpers/solana.helper";
 import { useState } from "react";
 
 export function HandClick() {
