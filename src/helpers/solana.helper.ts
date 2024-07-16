@@ -4,6 +4,8 @@ import { AddressLookupTableAccount, Connection, LAMPORTS_PER_SOL, Keypair, Publi
 import { sign } from 'tweetnacl';
 import { IDL, PROGRAM_ID } from "../idl/idl";
 import { IDLCounter, PROGRAM_ID_COUNTER } from "../idl/idlCounter";
+import { IDLCounterCpi, PROGRAM_ID_COUNTER_CPI } from "../idl/idCounterCpi";
+import { IDLHandClick, PROGRAM_ID_HAND_CLICK } from "../idl/idHandClick";
 import { getQuote } from "./jupiter.helper";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 
