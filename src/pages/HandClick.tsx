@@ -34,7 +34,7 @@ export function HandClick() {
                                 }
                             }}
                         >
-                            Initialize
+                            Increment Counter
                         </button>
                     </div>
                 )
