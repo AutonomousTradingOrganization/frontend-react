@@ -138,6 +138,27 @@ export const initializeCounter = async (anchorWallet: AnchorWallet): Promise<str
     }
 };
 
+// init handclick program to invoke counter 
+export const initializeHandClick = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+    try {
+      const accountTransaction = await getInitializeHandClickTransaction(anchorWallet.publicKey);
+      // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (accountTransaction && recentBlockhash) {
+          accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+// init counter program for handclick
 export const initializeCounterHandClick = async (anchorWallet: AnchorWallet): Promise<string | null> => {
     try {
       const accountTransaction = await getInitializeCounterHandClickTransaction(anchorWallet.publicKey);
@@ -157,6 +178,7 @@ export const initializeCounterHandClick = async (anchorWallet: AnchorWallet): Pr
     }
 };
 
+// Click handclick vers counter
 export const handClickCounter = async (anchorWallet: AnchorWallet): Promise<string | null> => {
     try {
       const handClickTransaction = await getHandClickCounterTransaction(anchorWallet.publicKey);
@@ -174,7 +196,7 @@ export const handClickCounter = async (anchorWallet: AnchorWallet): Promise<stri
       return null;
     }
 };
-
+// call by handClickCounter
 export const getHandClickCounterTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
         console.log(publicKey);
@@ -260,6 +282,21 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
       return await program.methods.initialize(data, age)
         .accounts({
             newAccount: accountPda,
+            signer: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
+export const getInitializeHandClickTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    try {
+      return await program.methods.initialize()
+        .accounts({
+            counterDataAccount: PROGRAM_ID_COUNTER_CPI,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })

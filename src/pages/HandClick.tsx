@@ -1,5 +1,5 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { getCounter, initializeCounter } from "../helpers/solana.helper";
+import { getCounter, initializeCounter, initializeCounterHandClick } from "../helpers/solana.helper";
 import { handClickCounter } from "../helpers/solana.helper";
 import { useState } from "react";
 
@@ -18,6 +18,24 @@ export function HandClick() {
             {
                 anchorWallet?.publicKey && (
                     <div style={{ display: 'flex', gap: '5px' }}>
+                        <button
+                            onClick={async () => {
+                                if (anchorWallet.publicKey) {
+                                    setSendingTransaction(true);
+                                    const initResult = await initializeCounterHandClick(anchorWallet);
+                                    setTransactionHash(initResult);
+                                    setSendingTransaction(false);
+                                    console.log("result handClickCounter");
+                                    console.log(initResult);
+                                    if(!initResult){
+                                        console.log("setError");
+                                        setTransactionError(true);
+                                    }
+                                }
+                            }}
+                        >
+                            Initialize hand click
+                        </button>
                         <button
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
