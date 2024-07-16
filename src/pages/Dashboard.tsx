@@ -2,6 +2,7 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { Authentication } from "./Authentication";
 import { Transfer } from "./Transfer";
 import { Account } from "./Account";
+import { Account } from "./Counter";
 import { Swap } from "./Swap";
 
 export function Dashboard() {
@@ -19,6 +20,7 @@ export function Dashboard() {
                         <Authentication />
                         <Transfer />
                         <Account />
+                        <Counter />
                         <Swap />
                     </div>
                 ) : (
