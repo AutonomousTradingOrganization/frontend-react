@@ -7,3 +7,6 @@
 [submodule "programs/pda_index"]
 	path = programs/pda_index
 	url = https://github.com/AutonomousTradingOrganization/pda_index
+[submodule "programs/counter-full"]
+	path = programs/counter-full
+	url = https://github.com/AutonomousTradingOrganization/counter-full
