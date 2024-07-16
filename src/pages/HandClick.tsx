@@ -34,7 +34,7 @@ export function HandClick() {
                                 }
                             }}
                         >
-                            Initialize hand click
+                            Initialize the counter for hand click
                         </button>
                         <button
                             onClick={async () => {
