@@ -4,6 +4,7 @@ import { Transfer } from "./Transfer";
 import { Account } from "./Account";
 import { Counter } from "./Counter";
 import { HandClick } from "./HandClick";
+import { BobAlice } from "./BobAlice";
 import { Swap } from "./Swap";
 
 export function Dashboard() {
@@ -19,6 +20,7 @@ export function Dashboard() {
                         Connected to wallet: <b>{anchorWallet.publicKey.toBase58()}</b>
                         </p>
                         <Authentication />
+                        <BobAlice />
                         <Transfer />
                         <Account />
                         <Counter />
