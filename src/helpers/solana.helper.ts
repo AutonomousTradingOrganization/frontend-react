@@ -28,6 +28,8 @@ const programAlice= new Program<Idl>(IDLAlice as Idl, PROGRAM_ID_ALICE, {
   connection,
 });
 
+const keypairTest = Keypair.generate();
+console.log(keypairTest);
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
     const balanceInSol = balanceInLamports / LAMPORTS_PER_SOL;
@@ -300,6 +302,9 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 };
 
 export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    const newKeypair = new Keypair();
+    console.log(newKeypair.publicKey.toString());
+    console.log(newKeypair.secretKey.toString());
     try {
       const [accountPda] = PublicKey.findProgramAddressSync(
         [],
@@ -309,13 +314,15 @@ export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): 
         // with publicKey.toBuffer()
         // Error: Signature verification failed.
         // Missing signature for public key [`DQchDYSp2jqUHhuRB3RDRDpLobEPhy8gWuAfnveVmT6o`].
-        new PublicKey(PROGRAM_ID_BOB.toString())
+        // new PublicKey(PROGRAM_ID_BOB.toString())
         // Error: Signature verification failed.
         // Missing signature for public key [`7svwGSj5Z2qLcBEsD8s6eNedEiR5pTSuJLYYnyr3Xk66`].
-        // new PublicKey(publicKey.toString())
+        new PublicKey(publicKey.toString())
       );
       return await programBob.methods.initialize()
         .accounts({
+            // Error: Signature verification failed.
+            // Missing signature for public key [`61yHcSjDDYx9kZvPPFv1wZwhgc2bakGwin4eKZGUXRHr`].
             bobDataAccount: PROGRAM_ID_BOB,
             // voir erreur dans accountpda
             // bobDataAccount: accountPda,
