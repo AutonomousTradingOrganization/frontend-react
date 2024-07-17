@@ -70,42 +70,6 @@ export function Account() {
                         >
                             Create Account
                         </button>
-                        <button
-                            onClick={async () => {
-                                if (anchorWallet.publicKey) {
-                                    setSendingTransaction(true);
-                                    const initResult = await initializeCounter(anchorWallet);
-                                    setTransactionHash(initResult);
-                                    setSendingTransaction(false);
-                                    console.log("initResult");
-                                    console.log(initResult);
-                                    if(!initResult){
-                                        console.log("setError");
-                                        setTransactionError(true);
-                                    }
-                                }
-                            }}
-                        >
-                            Create Counter only one
-                        </button>
-                        <button
-                            onClick={async () => {
-                                if (anchorWallet.publicKey) {
-                                    setSendingTransaction(true);
-                                    const incrementResult = await incrementCounter(anchorWallet);
-                                    setTransactionHash(incrementResult);
-                                    setSendingTransaction(false);
-                                    console.log("increment result");
-                                    console.log(incrementResult);
-                                    if(!incrementResult){
-                                        console.log("setError");
-                                        setTransactionError(true);
-                                    }
-                                }
-                            }}
-                        >
-                            Increment Counter
-                        </button>
                     </div>
                 )
             }

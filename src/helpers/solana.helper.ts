@@ -303,6 +303,9 @@ export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): 
     try {
       const [accountPda] = PublicKey.findProgramAddressSync(
         [],
+        // with []
+        // Error: Signature verification failed.
+        // Missing signature for public key [`HHFZKGMyrraom8aLJm7zgv4pSyMQKDsPqimaSs8j2Log`].
         // with publicKey.toBuffer()
         // Error: Signature verification failed.
         // Missing signature for public key [`DQchDYSp2jqUHhuRB3RDRDpLobEPhy8gWuAfnveVmT6o`].
@@ -313,8 +316,9 @@ export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): 
       );
       return await programBob.methods.initialize()
         .accounts({
-            // bobDataAccount: PROGRAM_ID_BOB,
-            bobDataAccount: accountPda,
+            bobDataAccount: PROGRAM_ID_BOB,
+            // voir erreur dans accountpda
+            // bobDataAccount: accountPda,
             // Error Code: TryingToInitPayerAsProgramAccount. Error Number: 4101.
             // Error Message: You cannot/should not initialize the payer account as a program account.",
             // bobDataAccount: publicKey,
