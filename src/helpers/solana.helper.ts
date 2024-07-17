@@ -166,7 +166,7 @@ export const initializeCounterHandClick = async (anchorWallet: AnchorWallet): Pr
     }
 };
 
-export const initializeBobAccount = async (anchorWallet: AnchorWallet, data: number, age: number): Promise<string | null> => {
+export const initializeBobAccount = async (anchorWallet: AnchorWallet): Promise<string | null> => {
     try {
       const accountTransaction = await getInitializeBobAccountTransaction(anchorWallet.publicKey);
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
