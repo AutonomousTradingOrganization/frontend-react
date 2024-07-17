@@ -334,7 +334,7 @@ export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): 
             // bobDataAccount: publicKey,
             // with newKeypair account
             bobDataAccount: newKeypair.publicKey,
-            signer: newKeypair.publicKey,
+            signer: publicKey,
             // signer: publicKey,
             systemProgram: SystemProgram.programId
         })
