@@ -6,6 +6,8 @@ import { IDL, PROGRAM_ID } from "../idl/idl";
 import { IDLCounter, PROGRAM_ID_COUNTER } from "../idl/idlCounter";
 import { IDLCounterCpi, PROGRAM_ID_COUNTER_CPI } from "../idl/idCounterCpi";
 import { IDLHandClick, PROGRAM_ID_HAND_CLICK } from "../idl/idHandClick";
+import { IDLAlice, PROGRAM_ID_ALICE } from "../idl/idlAlice";
+import { IDLBob, PROGRAM_ID_BOB } from "../idl/idlBob";
 import { getQuote } from "./jupiter.helper";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 
@@ -17,6 +19,12 @@ const programCounter = new Program<Idl>(IDLCounter as Idl, PROGRAM_ID_COUNTER, {
   connection,
 });
 const programHandClick = new Program<Idl>(IDLHandClick as Idl, PROGRAM_ID_HAND_CLICK, {
+  connection,
+});
+const programBob = new Program<Idl>(IDLBob as Idl, PROGRAM_ID_BOB, {
+  connection,
+});
+const programAlice= new Program<Idl>(IDLAlice as Idl, PROGRAM_ID_ALICE, {
   connection,
 });
 
@@ -158,6 +166,25 @@ export const initializeCounterHandClick = async (anchorWallet: AnchorWallet): Pr
     }
 };
 
+export const initializeBobAccount = async (anchorWallet: AnchorWallet, data: number, age: number): Promise<string | null> => {
+    try {
+      const accountTransaction = await getInitializeBobAccountTransaction(anchorWallet.publicKey);
+      // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (accountTransaction && recentBlockhash) {
+          accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
 // Click handclick vers counter
 export const handClickCounter = async (anchorWallet: AnchorWallet): Promise<string | null> => {
     try {
@@ -262,6 +289,28 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
       return await program.methods.initialize(data, age)
         .accounts({
             // newAccount: accountPda,
+            signer: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
+export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    try {
+      const [accountPda] = PublicKey.findProgramAddressSync(
+        [
+          publicKey.toBuffer()
+        ], 
+        new PublicKey(PROGRAM_ID_BOB.toString())
+      );
+      return await programBob.methods.initialize()
+        .accounts({
+            // newAccount: accountPda,
+            bobDataAccount: publicKey,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })

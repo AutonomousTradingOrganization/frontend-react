@@ -1,6 +1,5 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { getCounter, initializeCounter, initializeCounterHandClick } from "../helpers/solana.helper";
-import { handClickCounter } from "../helpers/solana.helper";
+import { initializeBobAccount, addAliceToBob } from "../helpers/solana.helper";
 import { useState } from "react";
 
 export function HandClick() {
@@ -22,10 +21,10 @@ export function HandClick() {
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
-                                    const initResult = await initializeCounterHandClick(anchorWallet);
+                                    const initResult = await initializeBobAccount(anchorWallet);
                                     setTransactionHash(initResult);
                                     setSendingTransaction(false);
-                                    console.log("result initializeCounterHandClick");
+                                    console.log("result initializeBobAccount");
                                     console.log(initResult);
                                     if(!initResult){
                                         console.log("setError");
@@ -34,16 +33,16 @@ export function HandClick() {
                                 }
                             }}
                         >
-                            Initialize the counter for hand click
+                            Initialize account
                         </button>
                         <button
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
-                                    const initResult = await handClickCounter(anchorWallet);
+                                    const initResult = await addAliceToBob(anchorWallet);
                                     setTransactionHash(initResult);
                                     setSendingTransaction(false);
-                                    console.log("result handClickCounter");
+                                    console.log("result addAliceToBob");
                                     console.log(initResult);
                                     if(!initResult){
                                         console.log("setError");
@@ -52,7 +51,7 @@ export function HandClick() {
                                 }
                             }}
                         >
-                            Increment Counter
+                            Alice add on Bob
                         </button>
                     </div>
                 )
