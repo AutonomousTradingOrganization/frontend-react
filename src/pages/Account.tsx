@@ -60,7 +60,7 @@ export function Account() {
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
-                                    const initResult = await initializeAccount(anchorWallet, 100, 20);
+                                    const initResult = await initializeAccount(anchorWallet, {data}, {age});
                                     setTransactionHash(initResult);
                                     setSendingTransaction(false);
                                     console.log("initResult");
