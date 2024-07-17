@@ -302,9 +302,10 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
       const [accountPda] = PublicKey.findProgramAddressSync(
-        [
-          publicKey.toBuffer()
-        ], 
+        [],
+        // with publicKey.toBuffer()
+        // Error: Signature verification failed.
+        // Missing signature for public key [`DQchDYSp2jqUHhuRB3RDRDpLobEPhy8gWuAfnveVmT6o`].
         new PublicKey(PROGRAM_ID_BOB.toString())
         // Error: Signature verification failed.
         // Missing signature for public key [`7svwGSj5Z2qLcBEsD8s6eNedEiR5pTSuJLYYnyr3Xk66`].
