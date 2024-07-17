@@ -3,7 +3,7 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { initializeBobAccount } from "../helpers/solana.helper";
 import { useState } from "react";
 
-export function HandClick() {
+export function BobAlice() {
 
     const anchorWallet = useAnchorWallet();
     const [transactionHash, setTransactionHash] = useState<string | null>(null);
