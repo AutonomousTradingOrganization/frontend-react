@@ -290,7 +290,7 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
       );
       return await program.methods.initialize(data, age)
         .accounts({
-            // newAccount: accountPda,
+            newAccount: accountPda,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
