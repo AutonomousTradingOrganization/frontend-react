@@ -305,8 +305,10 @@ export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): 
         [
           publicKey.toBuffer()
         ], 
-        // new PublicKey(PROGRAM_ID_BOB.toString())
-        new PublicKey(publicKey.toString())
+        new PublicKey(PROGRAM_ID_BOB.toString())
+        // Error: Signature verification failed.
+        // Missing signature for public key [`7svwGSj5Z2qLcBEsD8s6eNedEiR5pTSuJLYYnyr3Xk66`].
+        // new PublicKey(publicKey.toString())
       );
       return await programBob.methods.initialize()
         .accounts({
