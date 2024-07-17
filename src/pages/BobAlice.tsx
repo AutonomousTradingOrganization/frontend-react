@@ -13,7 +13,7 @@ export function BobAlice() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h1>
-                HandClick
+                Bob And Alice
             </h1>
             {
                 anchorWallet?.publicKey && (
