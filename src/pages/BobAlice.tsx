@@ -1,5 +1,6 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { initializeBobAccount, addAliceToBob } from "../helpers/solana.helper";
+//import { initializeBobAccount, addAliceToBob } from "../helpers/solana.helper";
+import { initializeBobAccount } from "../helpers/solana.helper";
 import { useState } from "react";
 
 export function HandClick() {
