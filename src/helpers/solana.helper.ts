@@ -305,14 +305,16 @@ export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): 
         [
           publicKey.toBuffer()
         ], 
-        new PublicKey(PROGRAM_ID_BOB.toString())
+        // new PublicKey(PROGRAM_ID_BOB.toString())
+        new PublicKey(publicKey.toString())
       );
       return await programBob.methods.initialize()
         .accounts({
-            // newAccount: accountPda,
             // bobDataAccount: PROGRAM_ID_BOB,
-            // bobDataAccount: accountPda,
-            bobDataAccount: publicKey,
+            bobDataAccount: accountPda,
+            // Error Code: TryingToInitPayerAsProgramAccount. Error Number: 4101.
+            // Error Message: You cannot/should not initialize the payer account as a program account.",
+            // bobDataAccount: publicKey,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
