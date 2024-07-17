@@ -310,7 +310,8 @@ export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): 
       return await programBob.methods.initialize()
         .accounts({
             // newAccount: accountPda,
-            bobDataAccount: PROGRAM_ID_BOB,
+            // bobDataAccount: PROGRAM_ID_BOB,
+            bobDataAccount: accountPda,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
