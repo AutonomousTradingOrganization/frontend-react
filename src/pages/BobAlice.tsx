@@ -36,7 +36,7 @@ export function HandClick() {
                         >
                             Initialize account
                         </button>
-                        <button
+                        {/* <button
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
@@ -53,7 +53,7 @@ export function HandClick() {
                             }}
                         >
                             Alice add on Bob
-                        </button>
+                        </button> */}
                     </div>
                 )
             }
