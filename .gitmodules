@@ -10,3 +10,6 @@
 [submodule "programs/counter-full"]
 	path = programs/counter-full
 	url = https://github.com/AutonomousTradingOrganization/counter-full
+[submodule "programs/ato"]
+	path = programs/ato
+	url = git@github.com:AutonomousTradingOrganization/ato.git

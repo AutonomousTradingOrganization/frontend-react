@@ -6,8 +6,9 @@ import { IDL, PROGRAM_ID } from "../idl/idl";
 import { IDLCounter, PROGRAM_ID_COUNTER } from "../idl/idlCounter";
 import { IDLCounterCpi, PROGRAM_ID_COUNTER_CPI } from "../idl/idCounterCpi";
 import { IDLHandClick, PROGRAM_ID_HAND_CLICK } from "../idl/idHandClick";
-import { IDLAlice, PROGRAM_ID_ALICE } from "../idl/idlAlice";
+// import { IDLAlice, PROGRAM_ID_ALICE } from "../idl/idlAlice";
 import { IDLBob, PROGRAM_ID_BOB } from "../idl/idlBob";
+import { IDLAto, PROGRAM_ID_ATO } from "../idl/idlAto";
 import { getQuote } from "./jupiter.helper";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 
@@ -24,9 +25,9 @@ const programHandClick = new Program<Idl>(IDLHandClick as Idl, PROGRAM_ID_HAND_C
 const programBob = new Program<Idl>(IDLBob as Idl, PROGRAM_ID_BOB, {
   connection,
 });
-const programAlice= new Program<Idl>(IDLAlice as Idl, PROGRAM_ID_ALICE, {
-  connection,
-});
+// const programAlice= new Program<Idl>(IDLAlice as Idl, PROGRAM_ID_ALICE, {
+//   connection,
+// });
 
 const keypairTest = Keypair.generate();
 console.log(keypairTest);
