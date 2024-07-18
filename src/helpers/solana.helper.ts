@@ -9,8 +9,14 @@ import { IDLHandClick, PROGRAM_ID_HAND_CLICK } from "../idl/idHandClick";
 // import { IDLAlice, PROGRAM_ID_ALICE } from "../idl/idlAlice";
 import { IDLBob, PROGRAM_ID_BOB } from "../idl/idlBob";
 import { IDLAto, PROGRAM_ID_ATO } from "../idl/idlAto";
+import { IDLAccountVoter, PROGRAM_ID_ACCOUNTVOTER } from "../idl/idlAccountVoter";
 import { getQuote } from "./jupiter.helper";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
+
+console.log(IDLAccountVoter);
+console.log(PROGRAM_ID_ACCOUNTVOTER.toString());
+
+console.log(process.env.REACT_APP_RPC_URL);
 
 const connection = new Connection(process.env.REACT_APP_RPC_URL!, "confirmed");
 const program = new Program<Idl>(IDL as Idl, PROGRAM_ID, {
@@ -28,9 +34,17 @@ const programBob = new Program<Idl>(IDLBob as Idl, PROGRAM_ID_BOB, {
 // const programAlice= new Program<Idl>(IDLAlice as Idl, PROGRAM_ID_ALICE, {
 //   connection,
 // });
+const programAto = new Program<Idl>(IDLAto as Idl, PROGRAM_ID_ATO, {
+  connection,
+});
 
+const programAccountVoter = new Program<Idl>(IDLAccountVoter as Idl, PROGRAM_ID_ACCOUNTVOTER, {
+  connection,
+});
+console.log(programAccountVoter);
 const keypairTest = Keypair.generate();
 console.log(keypairTest);
+
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
     const balanceInSol = balanceInLamports / LAMPORTS_PER_SOL;
@@ -128,6 +142,47 @@ export const initializeAccount = async (anchorWallet: AnchorWallet, data: number
       console.error(error);
       return null;
     }
+};
+
+export const initializeAccountVoter = async (anchorWallet: AnchorWallet, pseudo: string, mail: string, balance_total: number, balance_sol: number, total_trade: number, total_participation: number, win_trade: number): Promise<string | null> => {
+  try {
+    const accountVoterTransaction = await getInitializeAccountVoterTransaction(anchorWallet.publicKey, String(pseudo), String(mail), new BN(balance_total), new BN(balance_sol), new BN(total_trade), new BN(total_participation), new BN(win_trade));
+    // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+
+    const recentBlockhash = await getRecentBlockhash();
+    console.log("recentBlockhash")
+    console.log(recentBlockhash)
+    if (accountVoterTransaction && recentBlockhash) {
+      accountVoterTransaction.feePayer = anchorWallet.publicKey;
+      accountVoterTransaction.recentBlockhash = recentBlockhash;
+        const signedTransaction = await anchorWallet.signTransaction(accountVoterTransaction);
+        return await connection.sendRawTransaction(signedTransaction.serialize());
+    }
+    return null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+
+export const initializeAto = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+  try {
+    const atoTransaction = await getInitializeAto(anchorWallet.publicKey);
+    // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+
+    const recentBlockhash = await getRecentBlockhash();
+    if (atoTransaction && recentBlockhash) {
+      atoTransaction.feePayer = anchorWallet.publicKey;
+      atoTransaction.recentBlockhash = recentBlockhash;
+        const signedTransaction = await anchorWallet.signTransaction(atoTransaction);
+        return await connection.sendRawTransaction(signedTransaction.serialize());
+    }
+    return null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 export const initializeCounter = async (anchorWallet: AnchorWallet): Promise<string | null> => {
@@ -262,6 +317,23 @@ export const getAccount = async (publicKey: PublicKey): Promise<any> => {
     }
 };
 
+export const getAccountVoter = async (publicKey: PublicKey): Promise<any> => {
+  try {
+    const accountVoterSeed = Buffer.from("accountVoter");
+    const [accountVoterPda] = PublicKey.findProgramAddressSync(
+      [
+        accountVoterSeed, 
+          publicKey.toBuffer()
+      ], 
+      new PublicKey(PROGRAM_ID_ACCOUNTVOTER.toString())
+    );
+    return await programAccountVoter .account.newAccount.fetch(accountVoterPda);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export const getCounter = async (publicKey: PublicKey): Promise<any> => {
     try {
       const counterSeed = Buffer.from("counter");
@@ -300,6 +372,64 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
         console.error(error);
         return null;
       }
+};
+
+export const getInitializeAccountVoterTransaction = async (publicKey: PublicKey, pseudo: String, mail: String, balance_total: BN, balance_sol: BN, total_trade: BN, total_participation: BN, win_trade: BN): Promise<Transaction | null> => {
+  try {
+    console.log(PROGRAM_ID_ACCOUNTVOTER.toString());
+    const accountVoterSeed = Buffer.from("accountVoter");
+    const [accountVoterPda] = PublicKey.findProgramAddressSync(
+      [
+        accountVoterSeed, 
+        publicKey.toBuffer()
+      ], 
+      new PublicKey(PROGRAM_ID_ACCOUNTVOTER.toString())
+    );
+    console.log("accountVoterPda");
+    console.log(accountVoterPda);
+    console.log(accountVoterPda.toString());
+    console.log(pseudo);
+    console.log(mail);
+    console.log(balance_total);
+    console.log(balance_sol);
+    console.log(total_trade);
+    console.log(total_participation);
+    console.log(win_trade);
+    return await programAccountVoter.methods.initialize(pseudo, mail, balance_total, balance_sol, total_trade, total_participation, win_trade)
+      .accounts({
+          newAccount: accountVoterPda,
+          signer: publicKey,
+          systemProgram: SystemProgram.programId
+      })
+      .transaction()
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+
+export const getInitializeAto = async (publicKey: PublicKey): Promise<Transaction | null> => {
+  try {
+    // const accountSeed = Buffer.from("account");
+    // const [accountPda] = PublicKey.findProgramAddressSync(
+    //   [
+    //     accountSeed, 
+    //     publicKey.toBuffer()
+    //   ], 
+    //   new PublicKey(PROGRAM_ID.toString())
+    // );
+    return await programAto.methods.initialize()
+      .accounts({
+          atoData: publicKey,
+          signer: publicKey,
+          systemProgram: SystemProgram.programId
+      })
+      .transaction()
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
 };
 
 export const getInitializeBobAccountTransaction = async (publicKey: PublicKey): Promise<Transaction | null> => {

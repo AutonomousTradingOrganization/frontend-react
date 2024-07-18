@@ -1,7 +1,5 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { getAccount, initializeAccount } from "../helpers/solana.helper";
-import { getCounter, initializeCounter } from "../helpers/solana.helper";
-import { incrementCounter } from "../helpers/solana.helper";
 import { useState } from "react";
 
 export function Account() {

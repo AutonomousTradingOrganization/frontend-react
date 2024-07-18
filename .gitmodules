@@ -13,3 +13,6 @@
 [submodule "programs/ato"]
 	path = programs/ato
 	url = git@github.com:AutonomousTradingOrganization/ato.git
+[submodule "programs/account-voter"]
+	path = programs/account-voter
+	url = https://github.com/AutonomousTradingOrganization/account-voter
