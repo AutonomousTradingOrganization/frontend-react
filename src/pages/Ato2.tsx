@@ -12,7 +12,7 @@ export function Ato2() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h1>
-                ATO VOTING
+                ATO2 VOTING
             </h1>
             {
                 anchorWallet?.publicKey && (

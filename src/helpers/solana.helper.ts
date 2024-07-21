@@ -450,7 +450,7 @@ export const getInitializeAto2 = async (publicKey: PublicKey): Promise<Transacti
       );
       return await programAto2.methods.initialize()
         .accounts({
-            atoData: atoPda,
+            atoData: publicKey,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
