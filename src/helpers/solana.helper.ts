@@ -149,7 +149,7 @@ export const initializeAccount = async (anchorWallet: AnchorWallet, data: number
     }
 };
 
-export const initializeAto2 = async (anchorWallet: AnchorWallet, data: number, age: number): Promise<string | null> => {
+export const initializeAto2 = async (anchorWallet: AnchorWallet): Promise<string | null> => {
     try {
       const accountTransaction = await getInitializeAto2(anchorWallet.publicKey);
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
