@@ -453,6 +453,9 @@ export const getInitializeAto2 = async (publicKey: PublicKey): Promise<Transacti
             ], 
             new PublicKey(PROGRAM_ID_ATO2.toString())
         );
+        console.log(SystemProgram.programId);
+        console.log(atoPda);
+        console.log(publicKey);
       return await programAto2.methods.initialize()
         .accounts({
             atoData: atoPda,
