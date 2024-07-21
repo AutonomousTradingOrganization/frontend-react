@@ -106,7 +106,10 @@ export const IDLAccountVoter = {
         ]
       }
     }
-  ]
+  ],
+  "metadata": {
+    "address": "GNATWpZAcWZZjrC5j774mw7NUpM3C9UQAcEVw6HiBmyW"
+  }
 };
 export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('GNATWpZAcWZZjrC5j774mw7NUpM3C9UQAcEVw6HiBmyW');
 // export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('Bwxm317fm97PCMPCKb99QcM5UaUoC7RPn53vZLwCjvfL');
