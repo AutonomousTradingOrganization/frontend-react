@@ -228,49 +228,6 @@ export const initializeAccountVoter = async (anchorWallet: AnchorWallet, pseudo:
   }
 };
 
-export const initializeAccountVoter2 = async (anchorWallet: AnchorWallet, pseudo: string, mail: string, balance_total: number, balance_sol: number, total_trade: number, total_participation: number, win_trade: number): Promise<string | null> => {
-  try {
-    const accountVoterTransaction = await getInitializeAccountVoterTransaction2(anchorWallet.publicKey, new BN(pseudo), new BN(mail), new BN(balance_total), new BN(balance_sol), new BN(total_trade), new BN(total_participation), new BN(win_trade));
-    // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
-
-    const recentBlockhash = await getRecentBlockhash();
-    console.log("recentBlockhash")
-    console.log(recentBlockhash)
-    if (accountVoterTransaction && recentBlockhash) {
-      accountVoterTransaction.feePayer = anchorWallet.publicKey;
-      accountVoterTransaction.recentBlockhash = recentBlockhash;
-        const signedTransaction = await anchorWallet.signTransaction(accountVoterTransaction);
-        return await connection.sendRawTransaction(signedTransaction.serialize());
-    }
-    return null;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
-
-export const initializeAccountVoter3 = async (anchorWallet: AnchorWallet, pseudo: string, mail: string, balance_total: number, balance_sol: number, total_trade: number, total_participation: number, win_trade: number): Promise<string | null> => {
-  try {
-    const accountVoterTransaction = await getInitializeAccountVoterTransaction3(anchorWallet.publicKey, new Number(pseudo), new Number(mail), new BN(balance_total), new BN(balance_sol), new BN(total_trade), new BN(total_participation), new BN(win_trade));
-    // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
-
-    const recentBlockhash = await getRecentBlockhash();
-    console.log("recentBlockhash")
-    console.log(recentBlockhash)
-    if (accountVoterTransaction && recentBlockhash) {
-      accountVoterTransaction.feePayer = anchorWallet.publicKey;
-      accountVoterTransaction.recentBlockhash = recentBlockhash;
-        const signedTransaction = await anchorWallet.signTransaction(accountVoterTransaction);
-        return await connection.sendRawTransaction(signedTransaction.serialize());
-    }
-    return null;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
-
-
 export const initializeAto = async (anchorWallet: AnchorWallet): Promise<string | null> => {
   try {
     const atoTransaction = await getInitializeAto(anchorWallet.publicKey);
