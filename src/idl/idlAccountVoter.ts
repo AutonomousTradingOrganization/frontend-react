@@ -106,12 +106,11 @@ export const IDLAccountVoter = {
         ]
       }
     }
-  ],
-  "metadata": {
-    "address": "9cdkzeKvJaA9evco79NmzG4sGuDSuAQokvgsV8WSk8N3"
-  }
+  ]
 };
-export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('9cdkzeKvJaA9evco79NmzG4sGuDSuAQokvgsV8WSk8N3');
+export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('3z3S3HDBoGskstoaJYbhgEUT2zHGZJAV85c7RYnNPeyT');
+// export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('HgPQ299Phi7SBrG7mu4eQehPHyoHLtnvSGyuwS8MLgxr');
+// export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('9cdkzeKvJaA9evco79NmzG4sGuDSuAQokvgsV8WSk8N3');
 // export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('BpemDQtKwdVzWkT7pxyddsQf1boX9bS7sENHaxra2rrs');
 // export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('GNATWpZAcWZZjrC5j774mw7NUpM3C9UQAcEVw6HiBmyW');
 // export const PROGRAM_ID_ACCOUNTVOTER = new PublicKey('Bwxm317fm97PCMPCKb99QcM5UaUoC7RPn53vZLwCjvfL');
