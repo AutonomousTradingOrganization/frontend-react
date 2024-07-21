@@ -365,7 +365,7 @@ export const getAccountVoter = async (publicKey: PublicKey): Promise<any> => {
     const [accountVoterPda] = PublicKey.findProgramAddressSync(
       [
         accountVoterSeed, 
-          publicKey.toBuffer()
+        publicKey.toBuffer()
       ], 
       new PublicKey(PROGRAM_ID_ACCOUNTVOTER.toString())
     );
