@@ -1,5 +1,5 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { initializeAto } from "../helpers/solana.helper";
+import { initializeAto2 } from "../helpers/solana.helper";
 import { useState } from "react";
 
 export function Ato2() {
