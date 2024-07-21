@@ -1,5 +1,5 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { getAccountVoter, initializeAccountVoter } from "../helpers/solana.helper";
+import { getAccountVoter, initializeAccountVoter, initializeAccountVoter2, initializeAccountVoter3 } from "../helpers/solana.helper";
 import { useState } from "react";
 
 export function AccountVoter() {
@@ -119,6 +119,34 @@ export function AccountVoter() {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
                                     const initResult = await initializeAccountVoter(anchorWallet, pseudo, mail, balance_total, balance_sol, total_trade, total_participation, win_trade);
+                                    setTransactionHash(initResult);
+                                    setSendingTransaction(false);
+                                    console.log("initResult");
+                                    console.log(initResult);
+                                }
+                            }}
+                        >
+                            Create Account
+                        </button>
+                        <button
+                            onClick={async () => {
+                                if (anchorWallet.publicKey) {
+                                    setSendingTransaction(true);
+                                    const initResult = await initializeAccountVoter2(anchorWallet, pseudo, mail, balance_total, balance_sol, total_trade, total_participation, win_trade);
+                                    setTransactionHash(initResult);
+                                    setSendingTransaction(false);
+                                    console.log("initResult");
+                                    console.log(initResult);
+                                }
+                            }}
+                        >
+                            Create Account
+                        </button>
+                        <button
+                            onClick={async () => {
+                                if (anchorWallet.publicKey) {
+                                    setSendingTransaction(true);
+                                    const initResult = await initializeAccountVoter3(anchorWallet, pseudo, mail, balance_total, balance_sol, total_trade, total_participation, win_trade);
                                     setTransactionHash(initResult);
                                     setSendingTransaction(false);
                                     console.log("initResult");

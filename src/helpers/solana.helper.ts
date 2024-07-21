@@ -165,6 +165,48 @@ export const initializeAccountVoter = async (anchorWallet: AnchorWallet, pseudo:
   }
 };
 
+export const initializeAccountVoter2 = async (anchorWallet: AnchorWallet, pseudo: string, mail: string, balance_total: number, balance_sol: number, total_trade: number, total_participation: number, win_trade: number): Promise<string | null> => {
+  try {
+    const accountVoterTransaction = await getInitializeAccountVoterTransaction2(anchorWallet.publicKey, new BN(pseudo), new BN(mail), new BN(balance_total), new BN(balance_sol), new BN(total_trade), new BN(total_participation), new BN(win_trade));
+    // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+
+    const recentBlockhash = await getRecentBlockhash();
+    console.log("recentBlockhash")
+    console.log(recentBlockhash)
+    if (accountVoterTransaction && recentBlockhash) {
+      accountVoterTransaction.feePayer = anchorWallet.publicKey;
+      accountVoterTransaction.recentBlockhash = recentBlockhash;
+        const signedTransaction = await anchorWallet.signTransaction(accountVoterTransaction);
+        return await connection.sendRawTransaction(signedTransaction.serialize());
+    }
+    return null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const initializeAccountVoter3 = async (anchorWallet: AnchorWallet, pseudo: string, mail: string, balance_total: number, balance_sol: number, total_trade: number, total_participation: number, win_trade: number): Promise<string | null> => {
+  try {
+    const accountVoterTransaction = await getInitializeAccountVoterTransaction3(anchorWallet.publicKey, new Number(pseudo), new Number(mail), new BN(balance_total), new BN(balance_sol), new BN(total_trade), new BN(total_participation), new BN(win_trade));
+    // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+
+    const recentBlockhash = await getRecentBlockhash();
+    console.log("recentBlockhash")
+    console.log(recentBlockhash)
+    if (accountVoterTransaction && recentBlockhash) {
+      accountVoterTransaction.feePayer = anchorWallet.publicKey;
+      accountVoterTransaction.recentBlockhash = recentBlockhash;
+        const signedTransaction = await anchorWallet.signTransaction(accountVoterTransaction);
+        return await connection.sendRawTransaction(signedTransaction.serialize());
+    }
+    return null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 
 export const initializeAto = async (anchorWallet: AnchorWallet): Promise<string | null> => {
   try {
@@ -375,6 +417,74 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 };
 
 export const getInitializeAccountVoterTransaction = async (publicKey: PublicKey, pseudo: String, mail: String, balance_total: BN, balance_sol: BN, total_trade: BN, total_participation: BN, win_trade: BN): Promise<Transaction | null> => {
+  try {
+    console.log(PROGRAM_ID_ACCOUNTVOTER.toString());
+    const accountVoterSeed = Buffer.from("accountVoter");
+    const [accountVoterPda] = PublicKey.findProgramAddressSync(
+      [
+        accountVoterSeed, 
+        publicKey.toBuffer()
+      ], 
+      new PublicKey(PROGRAM_ID_ACCOUNTVOTER.toString())
+    );
+    console.log("accountVoterPda");
+    console.log(accountVoterPda);
+    console.log(accountVoterPda.toString());
+    console.log(pseudo);
+    console.log(mail);
+    console.log(balance_total);
+    console.log(balance_sol);
+    console.log(total_trade);
+    console.log(total_participation);
+    console.log(win_trade);
+    return await programAccountVoter.methods.initialize(pseudo, mail, balance_total, balance_sol, total_trade, total_participation, win_trade)
+      .accounts({
+          newAccount: accountVoterPda,
+          signer: publicKey,
+          systemProgram: SystemProgram.programId
+      })
+      .transaction()
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+export const getInitializeAccountVoterTransaction2 = async (publicKey: PublicKey, pseudo: BN, mail: BN, balance_total: BN, balance_sol: BN, total_trade: BN, total_participation: BN, win_trade: BN): Promise<Transaction | null> => {
+  try {
+    console.log(PROGRAM_ID_ACCOUNTVOTER.toString());
+    const accountVoterSeed = Buffer.from("accountVoter");
+    const [accountVoterPda] = PublicKey.findProgramAddressSync(
+      [
+        accountVoterSeed, 
+        publicKey.toBuffer()
+      ], 
+      new PublicKey(PROGRAM_ID_ACCOUNTVOTER.toString())
+    );
+    console.log("accountVoterPda");
+    console.log(accountVoterPda);
+    console.log(accountVoterPda.toString());
+    console.log(pseudo);
+    console.log(mail);
+    console.log(balance_total);
+    console.log(balance_sol);
+    console.log(total_trade);
+    console.log(total_participation);
+    console.log(win_trade);
+    return await programAccountVoter.methods.initialize(pseudo, mail, balance_total, balance_sol, total_trade, total_participation, win_trade)
+      .accounts({
+          newAccount: accountVoterPda,
+          signer: publicKey,
+          systemProgram: SystemProgram.programId
+      })
+      .transaction()
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+export const getInitializeAccountVoterTransaction3 = async (publicKey: PublicKey, pseudo: Number, mail: Number, balance_total: BN, balance_sol: BN, total_trade: BN, total_participation: BN, win_trade: BN): Promise<Transaction | null> => {
   try {
     console.log(PROGRAM_ID_ACCOUNTVOTER.toString());
     const accountVoterSeed = Buffer.from("accountVoter");
