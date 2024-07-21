@@ -1,5 +1,5 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { initializeAto2 } from "../helpers/solana.helper";
+import { initializeAto2, initializeAto21, initializeAto22 } from "../helpers/solana.helper";
 import { useState } from "react";
 
 export function Ato2() {
@@ -30,6 +30,34 @@ export function Ato2() {
                             }}
                         >
                             Create Voting 2 (initializeAto2)
+                        </button>
+                        <button
+                            onClick={async () => {
+                                if (anchorWallet.publicKey) {
+                                    setSendingTransaction(true);
+                                    const initResult = await initializeAto21(anchorWallet);
+                                    setTransactionHash(initResult);
+                                    setSendingTransaction(false);
+                                    console.log("initResult");
+                                    console.log(initResult);
+                                }
+                            }}
+                        >
+                            Create Voting 2 (initializeAto21)
+                        </button>
+                        <button
+                            onClick={async () => {
+                                if (anchorWallet.publicKey) {
+                                    setSendingTransaction(true);
+                                    const initResult = await initializeAto22(anchorWallet);
+                                    setTransactionHash(initResult);
+                                    setSendingTransaction(false);
+                                    console.log("initResult");
+                                    console.log(initResult);
+                                }
+                            }}
+                        >
+                            Create Voting 2 (initializeAto22)
                         </button>
                     </div>
                 )

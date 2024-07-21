@@ -168,6 +168,45 @@ export const initializeAto2 = async (anchorWallet: AnchorWallet): Promise<string
     }
 };
 
+export const initializeAto21 = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+    try {
+      const accountTransaction = await getInitializeAto21(anchorWallet.publicKey);
+      // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (accountTransaction && recentBlockhash) {
+          accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+export const initializeAto22 = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+    try {
+      const accountTransaction = await getInitializeAto22(anchorWallet.publicKey);
+      // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (accountTransaction && recentBlockhash) {
+          accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+
 export const initializeAccountVoter = async (anchorWallet: AnchorWallet, pseudo: string, mail: string, balance_total: number, balance_sol: number, total_trade: number, total_participation: number, win_trade: number): Promise<string | null> => {
   try {
     const accountVoterTransaction = await getInitializeAccountVoterTransaction(anchorWallet.publicKey, String(pseudo), String(mail), new BN(balance_total), new BN(balance_sol), new BN(total_trade), new BN(total_participation), new BN(win_trade));
@@ -473,6 +512,55 @@ export const getInitializeAto2 = async (publicKey: PublicKey): Promise<Transacti
         return null;
       }
 };
+
+export const getInitializeAto21 = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    try {
+
+        const atoDataPair = new Keypair();
+        console.log(atoDataPair);
+        console.log(atoDataPair.publicKey);
+        console.log(atoDataPair.publicKey.toString());
+
+        const [atoPda] = PublicKey.findProgramAddressSync(
+        [
+          atoDataPair.publicKey.toBuffer()
+        ], 
+        new PublicKey(PROGRAM_ID_ATO2.toString())
+      );
+      return await program.methods.initialize()
+        .accounts({
+            atoData: atoPda,
+            signer: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
+export const getInitializeAto22 = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    try {
+      const [atoPda] = PublicKey.findProgramAddressSync(
+        [
+          publicKey.toBuffer()
+        ], 
+        new PublicKey(PROGRAM_ID.toString())
+      );
+      return await program.methods.initialize()
+        .accounts({
+            atoData: atoPda,
+            signer: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
 
 export const getInitializeAccountVoterTransaction = async (publicKey: PublicKey, pseudo: String, mail: String, balance_total: BN, balance_sol: BN, total_trade: BN, total_participation: BN, win_trade: BN): Promise<Transaction | null> => {
   try {
