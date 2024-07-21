@@ -1,5 +1,5 @@
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { getAccountVoter, initializeAccountVoter, initializeAccountVoter2, initializeAccountVoter3 } from "../helpers/solana.helper";
+import { getAccountVoter, initializeAccountVoter } from "../helpers/solana.helper";
 import { useState } from "react";
 
 export function AccountVoter() {
