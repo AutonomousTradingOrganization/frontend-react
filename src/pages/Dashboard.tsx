@@ -7,6 +7,7 @@ import { Counter } from "./Counter";
 import { HandClick } from "./HandClick";
 import { BobAlice } from "./BobAlice";
 import { Ato } from "./Ato";
+import { Ato2 } from "./Ato2";
 import { Swap } from "./Swap";
 
 export function Dashboard() {
@@ -22,6 +23,7 @@ export function Dashboard() {
                         Connected to wallet: <b>{anchorWallet.publicKey.toBase58()}</b>
                         </p>
                         <AccountVoter />
+                        <Ato2 />
                         <Ato />
                         <Authentication />
                         <BobAlice />

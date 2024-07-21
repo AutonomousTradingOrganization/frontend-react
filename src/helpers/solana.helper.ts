@@ -9,6 +9,7 @@ import { IDLHandClick, PROGRAM_ID_HAND_CLICK } from "../idl/idHandClick";
 // import { IDLAlice, PROGRAM_ID_ALICE } from "../idl/idlAlice";
 import { IDLBob, PROGRAM_ID_BOB } from "../idl/idlBob";
 import { IDLAto, PROGRAM_ID_ATO } from "../idl/idlAto";
+import { IDLAto2, PROGRAM_ID_ATO2 } from "../idl/idlAto2";
 import { IDLAccountVoter, PROGRAM_ID_ACCOUNTVOTER } from "../idl/idlAccountVoter";
 import { getQuote } from "./jupiter.helper";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
@@ -44,6 +45,10 @@ const programAccountVoter = new Program<Idl>(IDLAccountVoter as Idl, PROGRAM_ID_
 console.log(programAccountVoter);
 const keypairTest = Keypair.generate();
 console.log(keypairTest);
+
+const programAto2 = new Program<Idl>(IDLAto2 as Idl, PROGRAM_ID_ATO2, {
+  connection,
+});
 
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
@@ -128,6 +133,25 @@ export const transferSolana = async (wallet: WalletContextState, destination: Pu
 export const initializeAccount = async (anchorWallet: AnchorWallet, data: number, age: number): Promise<string | null> => {
     try {
       const accountTransaction = await getInitializeAccountTransaction(anchorWallet.publicKey, new BN(data), new BN(age));
+      // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (accountTransaction && recentBlockhash) {
+          accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
+export const initializeAto2 = async (anchorWallet: AnchorWallet, data: number, age: number): Promise<string | null> => {
+    try {
+      const accountTransaction = await getInitializeAto2(anchorWallet.publicKey);
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
   
       const recentBlockhash = await getRecentBlockhash();
@@ -406,6 +430,27 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
       return await program.methods.initialize(data, age)
         .accounts({
             newAccount: accountPda,
+            signer: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
+export const getInitializeAto2 = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    try {
+      const [atoPda] = PublicKey.findProgramAddressSync(
+        [
+          publicKey.toBuffer()
+        ], 
+        new PublicKey(PROGRAM_ID_ATO2.toString())
+      );
+      return await programAto2.methods.initialize()
+        .accounts({
+            atoData: atoPda,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
