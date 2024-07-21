@@ -126,35 +126,7 @@ export function AccountVoter() {
                                 }
                             }}
                         >
-                            Create Account
-                        </button>
-                        <button
-                            onClick={async () => {
-                                if (anchorWallet.publicKey) {
-                                    setSendingTransaction(true);
-                                    const initResult = await initializeAccountVoter2(anchorWallet, pseudo, mail, balance_total, balance_sol, total_trade, total_participation, win_trade);
-                                    setTransactionHash(initResult);
-                                    setSendingTransaction(false);
-                                    console.log("initResult");
-                                    console.log(initResult);
-                                }
-                            }}
-                        >
-                            Create Account
-                        </button>
-                        <button
-                            onClick={async () => {
-                                if (anchorWallet.publicKey) {
-                                    setSendingTransaction(true);
-                                    const initResult = await initializeAccountVoter3(anchorWallet, pseudo, mail, balance_total, balance_sol, total_trade, total_participation, win_trade);
-                                    setTransactionHash(initResult);
-                                    setSendingTransaction(false);
-                                    console.log("initResult");
-                                    console.log(initResult);
-                                }
-                            }}
-                        >
-                            Create Account
+                            Create Account Voter
                         </button>
                     </div>
                 )
