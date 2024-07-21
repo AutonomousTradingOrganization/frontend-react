@@ -442,9 +442,10 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 
 export const getInitializeAto2 = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
-        const atoDataPubkey = Keypair.generate();
-        console.log(atoDataPubkey);
-        console.log(atoDataPubkey.toString());
+        // const atoDataPubkey = Keypair.generate();
+        const atoDataPair = new Keypair();
+        console.log(atoDataPair);
+        console.log(atoDataPair.publicKey.toString());
         const [atoPda] = PublicKey.findProgramAddressSync(
         [
           publicKey.toBuffer()
@@ -453,7 +454,7 @@ export const getInitializeAto2 = async (publicKey: PublicKey): Promise<Transacti
       );
       return await programAto2.methods.initialize()
         .accounts({
-            atoData: atoDataPubkey.toString(),
+            atoData: atoDataPair.publicKey,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
