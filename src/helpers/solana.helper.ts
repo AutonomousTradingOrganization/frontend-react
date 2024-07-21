@@ -527,7 +527,7 @@ export const getInitializeAto21 = async (publicKey: PublicKey): Promise<Transact
         ], 
         new PublicKey(PROGRAM_ID_ATO2.toString())
       );
-      return await program.methods.initialize()
+      return await programAto2.methods.initialize()
         .accounts({
             atoData: atoPda,
             signer: publicKey,
@@ -548,7 +548,7 @@ export const getInitializeAto22 = async (publicKey: PublicKey): Promise<Transact
         ], 
         new PublicKey(PROGRAM_ID.toString())
       );
-      return await program.methods.initialize()
+      return await programAto2.methods.initialize()
         .accounts({
             atoData: atoPda,
             signer: publicKey,
