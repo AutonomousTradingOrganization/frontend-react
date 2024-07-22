@@ -14,7 +14,7 @@ export function VoterRegistration() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h1>
-                Proposal create
+                Voter registration
             </h1>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <div>
@@ -52,11 +52,11 @@ export function VoterRegistration() {
                                     setSendingTransaction(false);
                                     console.log("initResult");
                                     console.log(initResult);
-                                    console.log("https://explorer.solana.com/tx/"+transactionHash+"?cluster=devnet")
+                                    console.log("https://explorer.solana.com/tx/"+initResult+"?cluster=devnet")
                                 }
                             }}
                         >
-                            Create Proposal
+                            Register
                         </button>
                     </div>
                 )
