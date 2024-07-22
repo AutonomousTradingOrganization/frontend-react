@@ -208,7 +208,7 @@ console.log("accountTransaction");
 console.log(accountTransaction);
       const recentBlockhash = await getRecentBlockhash();
       if (accountTransaction && recentBlockhash) {
-          accountTransaction.feePayer = anchorWallet.publicKey;
+        //   accountTransaction.feePayer = anchorWallet.publicKey;
           accountTransaction.feePayer = signUser.publicKey;
 
           accountTransaction.recentBlockhash = recentBlockhash;
