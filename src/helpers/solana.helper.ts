@@ -507,7 +507,8 @@ export const getCreateProposalAto = async (publicKey: PublicKey, title: String, 
         [
           proposalCreateSeed,
           publicKey.toBuffer(),
-          new BN(2).toBuffer()
+        //   new BN(2).toBuffer()
+          new BN(2).toArrayLike(Buffer, "be", 8)
         ], 
         new PublicKey(PROGRAM_ID_ATO2.toString())
       );
