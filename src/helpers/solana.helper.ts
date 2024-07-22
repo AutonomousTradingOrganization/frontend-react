@@ -617,11 +617,11 @@ export const getVoteAto = async (publicKey: PublicKey, vote: Number, amount: BN,
         console.log("tailIndex");
         console.log(tailIndex);
         console.log(tailIndexProposal);
-        console.log(tailIndexProposal.status);
-        console.log(tailIndexProposal.proposalIndexHead);
-        console.log(tailIndexProposal.proposalIndexTail);
-        console.log(tailIndexProposal.voterIndexTail);
-        console.log(tailIndexProposal.voterIndexHead);
+        console.log(tailIndex.status);
+        console.log(tailIndex.proposalIndexHead);
+        console.log(tailIndex.proposalIndexTail);
+        console.log(tailIndex.voterIndexTail);
+        console.log(tailIndex.voterIndexHead);
         const propsIndexBuffer = Buffer.allocUnsafe(2);
         propsIndexBuffer.writeUInt16LE(tailIndexProposal, 0);
         console.log("propsIndexBuffer");
