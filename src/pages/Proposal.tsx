@@ -88,6 +88,7 @@ export function Proposal() {
                                     setSendingTransaction(false);
                                     console.log("initResult");
                                     console.log(initResult);
+                                    console.log("https://explorer.solana.com/tx/"+transactionHash+"?cluster=devnet")
                                 }
                             }}
                         >
