@@ -8,70 +8,74 @@ export function Proposal() {
     const [transactionHash, setTransactionHash] = useState<string | null>(null);
     const [transactionError, setTransactionError] = useState<boolean>(false);
     const [sendingTransaction, setSendingTransaction] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>('name');
+    const [description, setDescription] = useState<string>('mail');
+    const [mode, setMode] = useState<number>(0);
+    const [threshold, setThreshold] = useState<number>(0);
+    const [deadline, setDeadline] = useState<number>(0);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h1>
                 Proposal create
             </h1>
-
-            <div>
-                <label>
-                    Title
-                </label>
-                <input
-                    type="string"
-                    value={title}
-                    onChange={(e) => setMail(e.target.value)}
-                    placeholder="Mail"
-                />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}></div>
+                <div>
+                    <label>
+                        Title
+                    </label>
+                    <input
+                        type="string"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="Mail"
+                    />
+                </div>
+                <div>
+                    <label>
+                        Description
+                    </label>
+                    <input
+                        type="string"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Mail"
+                    />
+                </div>
+                <div>
+                    <label>
+                        Mode
+                    </label>
+                    <input
+                        type="number"
+                        value={mode}
+                        onChange={(e) => setMode(parseInt(e.target.value))}
+                        placeholder="Mail"
+                    />
+                </div>
+                <div>
+                    <label>
+                        Threshold
+                    </label>
+                    <input
+                        type="number"
+                        value={threshold}
+                        onChange={(e) => setThreshold(parseInt(e.target.value))}
+                        placeholder="Mail"
+                    />
+                </div>
+                <div>
+                    <label>
+                        Deadline
+                    </label>
+                    <input
+                        type="number"
+                        value={deadline}
+                        onChange={(e) => setDeadline(parseInt(e.target.value))}
+                        placeholder="Mail"
+                    />
+                </div>
             </div>
-            <div>
-                <label>
-                    Description
-                </label>
-                <input
-                    type="string"
-                    value={description}
-                    onChange={(e) => setMail(e.target.value)}
-                    placeholder="Mail"
-                />
-            </div>
-            <div>
-                <label>
-                    Mode
-                </label>
-                <input
-                    type="number"
-                    value={mode}
-                    onChange={(e) => setBalanceTotal(parseInt(e.target.value))}
-                    placeholder="Mail"
-                />
-            </div>
-            <div>
-                <label>
-                    Threshold
-                </label>
-                <input
-                    type="number"
-                    value={threshold}
-                    onChange={(e) => setBalanceTotal(parseInt(e.target.value))}
-                    placeholder="Mail"
-                />
-            </div>
-            <div>
-                <label>
-                    Deadline
-                </label>
-                <input
-                    type="number"
-                    value={deadline}
-                    onChange={(e) => setBalanceTotal(parseInt(e.target.value))}
-                    placeholder="Mail"
-                />
-            </div>
-
-
             {
                 anchorWallet?.publicKey && (
                     <div style={{ display: 'flex', gap: '5px' }}>
