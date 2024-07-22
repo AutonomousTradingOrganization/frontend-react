@@ -42,13 +42,22 @@ const programAto = new Program<Idl>(IDLAto as Idl, PROGRAM_ID_ATO, {
 const programAccountVoter = new Program<Idl>(IDLAccountVoter as Idl, PROGRAM_ID_ACCOUNTVOTER, {
   connection,
 });
-console.log(programAccountVoter);
-const keypairTest = Keypair.generate();
-console.log(keypairTest);
 
 const programAto2 = new Program<Idl>(IDLAto2 as Idl, PROGRAM_ID_ATO2, {
   connection,
 });
+
+console.log(programAccountVoter);
+const keypairTest = Keypair.generate();
+console.log(keypairTest);
+console.log(keypairTest.publicKey.toString());
+console.log(keypairTest.secretKey.toString());
+let lbsol = await getSolanaBalance(keypairTest.publicKey.toString());
+console.log(lbsol);
+let airdopNewAccount = await connection.requestAirdrop(keypairTest.publicKey, LAMPORTS_PER_SOL);
+console.log(airdopNewAccount);
+console.log("https://explorer.solana.com/address/"+airdopNewAccount);
+
 
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
