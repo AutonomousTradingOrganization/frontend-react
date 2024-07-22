@@ -1,6 +1,6 @@
 import { BN, Idl, Program } from "@coral-xyz/anchor";
 import { AnchorWallet, WalletContextState } from "@solana/wallet-adapter-react";
-import { AddressLookupTableAccount, Connection, LAMPORTS_PER_SOL, Keypair, PublicKey, SystemProgram, Transaction, TransactionInstruction, TransactionMessage, VersionedTransaction } from "@solana/web3.js";
+import { AddressLookupTableAccount, Connection, LAMPORTS_PER_SOL, Keypair, PublicKey, SystemProgram, Transaction, TransactionInstruction, TransactionMessage, VersionedTransaction, Signer } from "@solana/web3.js";
 import { sign } from 'tweetnacl';
 import { IDL, PROGRAM_ID } from "../idl/idl";
 import { IDLCounter, PROGRAM_ID_COUNTER } from "../idl/idlCounter";
@@ -64,7 +64,9 @@ const programAto2 = new Program<Idl>(IDLAto2 as Idl, PROGRAM_ID_ATO2, {
 //     console.log(airdopNewAccount2);
 // })();
 
-const atoUser = Keypair.fromSecretKey(Uint8Array.from([131,118,141,236,168,118,207,212,69,123,27,98,244,137,48,59,140,58,63,251,172,114,84,95,124,20,197,204,153,230,204,7,233,249,47,75,220,170,231,208,140,129,190,253,66,143,19,33,152,213,9,250,148,238,163,41,87,228,15,134,164,29,248,177]));
+const seed = new Uint8Array(131,118,141,236,168,118,207,212,69,123,27,98,244,137,48,59,140,58,63,251,172,114,84,95,124,20,197,204,153,230,204,7,233,249,47,75,220,170,231,208,140,129,190,253,66,143,19,33,152,213,9,250,148,238,163,41,87,228,15,134,164,29,248,177]);
+
+const atoUser = Keypair.fromSecretKey(seed);
 console.log(atoUser);
 console.log(atoUser.publicKey);
 console.log(atoUser.publicKey.toString());
@@ -74,6 +76,11 @@ console.log(atoUser.publicKey.toString());
     console.log(lbsol);
 })();
 
+const sign: Signer = {
+    publicKey: atoUser.publicKey,
+    secretKey: seed
+}
+console.log(sign);
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
     const balanceInSol = balanceInLamports / LAMPORTS_PER_SOL;
@@ -196,7 +203,8 @@ export const initializeAto21 = async (anchorWallet: AnchorWallet): Promise<strin
     try {
       const accountTransaction = await getInitializeAto21(anchorWallet.publicKey);
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
-  
+console.log("accountTransaction");
+console.log(accountTransaction);
       const recentBlockhash = await getRecentBlockhash();
       if (accountTransaction && recentBlockhash) {
           accountTransaction.feePayer = anchorWallet.publicKey;
@@ -215,7 +223,8 @@ export const initializeAto22 = async (anchorWallet: AnchorWallet): Promise<strin
     try {
       const accountTransaction = await getInitializeAto22(anchorWallet.publicKey);
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
-
+console.log("accountTransaction");
+console.log(accountTransaction);
       const recentBlockhash = await getRecentBlockhash();
       if (accountTransaction && recentBlockhash) {
           console.log(accountTransaction);
