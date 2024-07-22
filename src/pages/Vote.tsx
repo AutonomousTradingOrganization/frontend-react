@@ -26,7 +26,6 @@ export function Vote() {
                         type="boolean"
                         value={amount}
                         onChange={(e) => setVote(e.target.value)}
-                        placeholder="Name"
                     />
                 </div>
                 <div>
