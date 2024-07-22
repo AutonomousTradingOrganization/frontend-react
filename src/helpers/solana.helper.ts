@@ -209,9 +209,13 @@ console.log(accountTransaction);
       const recentBlockhash = await getRecentBlockhash();
       if (accountTransaction && recentBlockhash) {
           accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.feePayer = signUser.publicKey;
+
           accountTransaction.recentBlockhash = recentBlockhash;
-          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
-          return await connection.sendRawTransaction(signedTransaction.serialize());
+          accountTransaction.sign(signUser);
+        //   const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          const signedTransaction = accountTransaction.serialize();
+          return await connection.sendRawTransaction(signedTransaction);
       }
       return null;
     } catch (error) {
