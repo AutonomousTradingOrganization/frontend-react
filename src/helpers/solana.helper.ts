@@ -642,7 +642,8 @@ export const getVoteAto = async (publicKey: PublicKey, vote: Boolean, amount: BN
         .accounts({
             voteData     : voteDataPda,
             voterData : voteDataPda,
-            propData     : prop1.publicKey,
+            // propData     : prop1.publicKey,
+            propData     : new PublicKey("FARvLU4urEohM8knQc4YRqBEmqJPUKvHnPXGzc2NC9Vu"),
             atoData: atoUser.publicKey,
             voter: publicKey,
             systemProgram: SystemProgram.programId
