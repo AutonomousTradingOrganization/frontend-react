@@ -15,15 +15,14 @@ export function Dashboard() {
             {
                 anchorWallet?.publicKey ? (
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <Proposal />
                         <VoterRegistration />
-                        <AccountVoter />
+                        <Proposal />
                         <Vote />
                         <Ato2 />
                     </div>
                 ) : (
                     <div>
-                    <h1><img src="/logo512.png" />ATO : Autonomous Trading Organization</h1>
+                    <h1>ATO : Autonomous Trading Organization</h1>
                     <p>
                         Cliquer sur le bouton "Connect Wallet" pour connecter votre wallet Solana a la dApp ATO.
                     </p>

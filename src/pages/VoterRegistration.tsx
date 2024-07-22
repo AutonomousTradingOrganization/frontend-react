@@ -61,27 +61,29 @@ export function VoterRegistration() {
                     </div>
                 )
             }
-            {
-                sendingTransaction && (
-                    <p>
-                        Sending transaction...
-                    </p>
-                )
-            }
-            {
-                transactionHash && !sendingTransaction && (
-                    <p>
-                        Transaction hash: <b>{transactionHash}</b>
-                    </p>
-                )
-            }
-            {
-                transactionError && !sendingTransaction && (
-                    <p>
-                        Transaction Error
-                    </p>
-                )
-            }
+            <div>
+                {
+                    sendingTransaction && (
+                        <p>
+                            Sending transaction...
+                        </p>
+                    )
+                }
+                {
+                    transactionHash && !sendingTransaction && (
+                        <p>
+                            Transaction hash: <b>{transactionHash}</b>
+                        </p>
+                    )
+                }
+                {
+                    transactionError && !sendingTransaction && (
+                        <p>
+                            Transaction Error
+                        </p>
+                    )
+                }
+            </div>
         </div>
     );
 }
