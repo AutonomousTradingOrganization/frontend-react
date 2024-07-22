@@ -37,7 +37,7 @@ function App() {
           <WalletMultiButton></WalletMultiButton>
         </div>
       </div>
-        <MyButton to="" />
+        {/* <MyButton to="" />
         <MyButton to="ato2" />
         <MyButton to="/ato2" />
         <MyButton to="/frontend-react-build/ato2" />
@@ -49,7 +49,8 @@ function App() {
             <Route path="frontend-react-build/ato2" element={<Ato2 />} />
             <Route path="/ato2" element={<Ato2 />} />
             <Route path="ato2" element={<Ato2 />} />
-        </Routes>
+        </Routes> */}
+        <Dashboard />
     </div>
   );
 }
