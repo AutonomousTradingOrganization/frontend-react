@@ -9,6 +9,7 @@ import { BobAlice } from "./BobAlice";
 import { Ato } from "./Ato";
 import { Ato2 } from "./Ato2";
 import { Proposal } from "./Proposal";
+import { VoterRegistration } from "./VoterRegistration";
 import { Swap } from "./Swap";
 
 export function Dashboard() {
@@ -23,8 +24,9 @@ export function Dashboard() {
                         <p>
                         Connected to wallet: <b>{anchorWallet.publicKey.toBase58()}</b>
                         </p>
-                        <AccountVoter />
                         <Proposal />
+                        <VoterRegistration />
+                        <AccountVoter />
                         <Ato2 />
                         <Ato />
                         <Authentication />
