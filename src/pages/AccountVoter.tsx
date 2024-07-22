@@ -126,7 +126,7 @@ export function AccountVoter() {
                                 }
                             }}
                         >
-                            Create Account
+                            Create Account Voter
                         </button>
                     </div>
                 )
@@ -134,7 +134,7 @@ export function AccountVoter() {
             {
                 account !== undefined && (
                     <p>
-                        Account: <b>{account === null ? 'N/A' : `data: ${account.data} - age: ${account.age}`}</b>
+                        Account: <b>{account === null ? 'N/A' : `pseudo: ${account.pseudo} - mail: ${account.mail} - balance_total: ${account.balance_total} - balance_sol: ${account.balance_sol} - total_trade: ${account.total_trade} - total_participation: ${account.total_participation} - win_trade: ${account.win_trade}`}</b>
                     </p>
                 )
             }
