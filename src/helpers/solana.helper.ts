@@ -503,7 +503,7 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 export const getCreateProposalAto = async (publicKey: PublicKey, title: String, description: String, mode: BN, threshold: BN, deadline: BN): Promise<Transaction | null> => {
     try {
     const tailIndex = await programAto2.account.atoData.fetch(atoUser.publicKey);
-    const tailIndexProposal = tailIndex.proposalIndexTail;
+    const tailIndexProposal = Number(tailIndex.proposalIndexTail);
     // const tailIndexProposal = tailIndex.proposalIndexTail.valueOf();
     // const tailIndexProposal = 2;
     console.log(tailIndex);
