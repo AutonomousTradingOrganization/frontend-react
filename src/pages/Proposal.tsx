@@ -19,7 +19,7 @@ export function Proposal() {
             <h1>
                 Proposal create
             </h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}></div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <div>
                     <label>
                         Title
