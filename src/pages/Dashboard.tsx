@@ -8,6 +8,7 @@ import { HandClick } from "./HandClick";
 import { BobAlice } from "./BobAlice";
 import { Ato } from "./Ato";
 import { Ato2 } from "./Ato2";
+import { Proposal } from "./Proposal";
 import { Swap } from "./Swap";
 
 export function Dashboard() {

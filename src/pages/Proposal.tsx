@@ -2,7 +2,7 @@ import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { createProposalAto } from "../helpers/solana.helper";
 import { useState } from "react";
 
-export function Ato() {
+export function Proposal() {
 
     const anchorWallet = useAnchorWallet();
     const [transactionHash, setTransactionHash] = useState<string | null>(null);
