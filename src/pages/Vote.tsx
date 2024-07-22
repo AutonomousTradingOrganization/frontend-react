@@ -9,8 +9,8 @@ export function Vote() {
     const [transactionError, setTransactionError] = useState<boolean>(false);
     const [sendingTransaction, setSendingTransaction] = useState<boolean>(false);
     const [vote, setVote] = useState<number>(0);
-    const [amount, setAmount] = useState<string>('Amount');
-    const [now, setNow] = useState<string>('Now');
+    const [amount, setAmount] = useState<number>(0);
+    const [now, setNow] = useState<number>(0);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
