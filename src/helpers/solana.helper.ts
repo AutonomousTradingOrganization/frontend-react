@@ -618,6 +618,7 @@ export const getVoteAto = async (publicKey: PublicKey, vote: Number, amount: BN,
         console.log(tailIndexProposal);
         const propsIndexBuffer = Buffer.allocUnsafe(2);
         propsIndexBuffer.writeUInt16LE(tailIndexProposal, 0);
+        console.log("propsIndexBuffer");
         console.log(propsIndexBuffer);
 
         const voteTailIndex = 0;
@@ -625,9 +626,9 @@ export const getVoteAto = async (publicKey: PublicKey, vote: Number, amount: BN,
         const voteIndexBuffer = Buffer.allocUnsafe(2);
         voteIndexBuffer.writeUInt16LE(voteTailIndex, 0);
 
-        const allProposals = await programAto2.account.propData.all()
-        console.log("allProposals");
-        console.log(allProposals);
+        // const allProposals = await programAto2.account.propData.all()
+        // console.log("allProposals");
+        // console.log(allProposals);
         const voteSeed = Buffer.from("ATO_VOTE"); 
         const [voteDataPda] = PublicKey.findProgramAddressSync(
         [

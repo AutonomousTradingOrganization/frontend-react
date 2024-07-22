@@ -15,7 +15,7 @@ export function Vote() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <h1>
-                Voter registration
+                Vote
             </h1>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <div>
