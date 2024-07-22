@@ -222,7 +222,7 @@ export const voterRegistrationAto = async (anchorWallet: AnchorWallet, name: str
 
 export const voteAto = async (anchorWallet: AnchorWallet, vote: number, amount: number, now: number): Promise<string | null> => {
     try {
-      const accountTransaction = await getVoteAto(anchorWallet.publicKey, Boolean(vote), new BN(amount), new BN(now) );
+      const accountTransaction = await getVoteAto(anchorWallet.publicKey, Number(vote), new BN(amount), new BN(now) );
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
   
       const recentBlockhash = await getRecentBlockhash();
