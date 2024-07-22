@@ -21,7 +21,7 @@ export function Ato2() {
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
-                                    const initResult = await initializeAto22(anchorWallet);
+                                    const initResult = await initializeAto21(anchorWallet);
                                     setTransactionHash(initResult);
                                     setSendingTransaction(false);
                                     console.log("initResult");
