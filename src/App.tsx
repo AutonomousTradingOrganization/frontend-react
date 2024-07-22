@@ -37,7 +37,6 @@ function App() {
           <WalletMultiButton></WalletMultiButton>
         </div>
       </div>
-      <Router>
         <MyButton to="" />
         <MyButton to="ato2" />
         <MyButton to="/ato2" />
@@ -51,7 +50,6 @@ function App() {
             <Route path="/ato2" element={<Ato2 />} />
             <Route path="ato2" element={<Ato2 />} />
         </Routes>
-      </Router>
     </div>
   );
 }
