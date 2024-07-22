@@ -16,11 +16,12 @@ export function Ato2() {
             </h1>
             {
                 anchorWallet?.publicKey && (
+                    <div style={{ display: 'flex', gap: '5px' }}>
                         <button
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
-                                    const initResult = await initializeAto21(anchorWallet);
+                                    const initResult = await initializeAto22(anchorWallet);
                                     setTransactionHash(initResult);
                                     setSendingTransaction(false);
                                     console.log("initResult");
@@ -28,8 +29,6 @@ export function Ato2() {
                                 }
                             }}
                         >
-                            Create Voting 2 (initializeAto21)
-                        </button>
                             Create Voting Data
                         </button>
                     </div>
