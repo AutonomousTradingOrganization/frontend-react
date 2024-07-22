@@ -23,9 +23,9 @@ export function Vote() {
                         Vote
                     </label>
                     <input
-                        type="boolean"
+                        type="number"
                         value={vote}
-                        onChange={(e) => setVote(e.target.value)}
+                        onChange={(e) => setVote(e.target.value)}   
                     />
                 </div>
                 <div>
