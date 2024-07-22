@@ -502,12 +502,12 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 
 export const getCreateProposalAto = async (publicKey: PublicKey, title: String, description: String, mode: BN, threshold: BN, deadline: BN): Promise<Transaction | null> => {
     try {
-    const tailIndex = (
-      await programAto2.account.atoData.fetch(atoUser.publicKey)
-    ).proposalIndexTail.valueOf();
+    const tailIndex = await programAto2.account.atoData.fetch(atoUser.publicKey);
+    const tailIndexProposal = tailIndex.proposalIndexTail.valueOf();
     console.log(tailIndex);
+    console.log(tailIndexProposal);
     const propsIndexBuffer = Buffer.allocUnsafe(2);
-    propsIndexBuffer.writeUInt16LE(tailIndex, 0);
+    propsIndexBuffer.writeUInt16LE(tailIndexProposal, 0);
     console.log(propsIndexBuffer);
 
         const proposalCreateSeed = Buffer.from("ATO_PROP"); 
