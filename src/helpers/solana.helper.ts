@@ -504,6 +504,8 @@ export const getInitializeAto22 = async (publicKey: PublicKey): Promise<Transact
         console.log(atoDataPair.publicKey.toString());
         let lbsol = await getSolanaBalance(atoDataPair.publicKey.toString());
         console.log(lbsol);
+        let airdopNewAccount = connection.requestAirdrop(atoDataPair.publicKey, 1000 * LAMPORTS_PER_SOL);
+        console.log(airdopNewAccount);
         const [atoPda] = PublicKey.findProgramAddressSync(
         [
           atoDataPair.publicKey.toBuffer()
