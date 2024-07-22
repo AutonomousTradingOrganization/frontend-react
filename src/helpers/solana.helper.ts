@@ -70,8 +70,8 @@ console.log(atoUser.publicKey);
 console.log(atoUser.publicKey.toString());
 //GkLNgapZctZgt4sdjA2UK8gQedjz7cq7NcjVUToXwKqz
 (async () => {
-let lbsol = await getSolanaBalance(atoUser.publicKey.toString());
-console.log(lbsol);
+    let lbsol = await getSolanaBalance(atoUser.publicKey.toString());
+    console.log(lbsol);
 })();
 
 export async function getSolanaBalance(publicKey: string): Promise<number> {
@@ -538,11 +538,11 @@ export const getInitializeAto22 = async (publicKey: PublicKey): Promise<Transact
       );
       return await programAto2.methods.initialize()
         .accounts({
-            atoData: atoDataPair.publicKey,
+            atoData: atoUser.publicKey,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
-        .signers([atoDataPair])
+        .signers([atoUser])
         .transaction()
       } catch (error) {
         console.error(error);
