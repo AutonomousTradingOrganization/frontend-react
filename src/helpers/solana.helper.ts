@@ -69,8 +69,11 @@ console.log(atoUser);
 console.log(atoUser.publicKey);
 console.log(atoUser.publicKey.toString());
 //GkLNgapZctZgt4sdjA2UK8gQedjz7cq7NcjVUToXwKqz
+(async () => {
 let lbsol = await getSolanaBalance(atoUser.publicKey.toString());
 console.log(lbsol);
+})();
+
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
     const balanceInSol = balanceInLamports / LAMPORTS_PER_SOL;
