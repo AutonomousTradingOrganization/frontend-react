@@ -610,7 +610,7 @@ export const getVoterRegistrationAto = async (publicKey: PublicKey, name: String
       }
 };
 
-export const getVoteAto = async (publicKey: PublicKey, vote: Bool, amount: BN, now: BN): Promise<Transaction | null> => {
+export const getVoteAto = async (publicKey: PublicKey, vote: Boolean, amount: BN, now: BN): Promise<Transaction | null> => {
     try {
         const tailIndex = await programAto2.account.atoData.fetch(atoUser.publicKey);
         const tailIndexProposal = Number(tailIndex.proposalIndexTail);
