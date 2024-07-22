@@ -502,13 +502,21 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 
 export const getCreateProposalAto = async (publicKey: PublicKey, title: String, description: String, mode: BN, threshold: BN, deadline: BN): Promise<Transaction | null> => {
     try {
+    const tailIndex = (
+      await program.account.atoData.fetch(atoUser.publicKey)
+    ).proposalIndexTail.valueOf();
+    console.log(tailIndex);
+    const propsIndexBuffer = Buffer.allocUnsafe(2);
+    propsIndexBuffer.writeUInt16LE(tailIndex, 0);
+    console.log(propsIndexBuffer);
+
         const proposalCreateSeed = Buffer.from("ATO_PROP"); 
         const [propDataPda] = PublicKey.findProgramAddressSync(
         [
           proposalCreateSeed,
           publicKey.toBuffer(),
         //   new BN(2).toBuffer()
-          new BN(2).toArrayLike(Buffer, "be", 8)
+          new BN(2).toArrayLike(Buffer, "le", 8)
         ], 
         new PublicKey(PROGRAM_ID_ATO2.toString())
       );
