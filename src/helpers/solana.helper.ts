@@ -642,7 +642,8 @@ export const getVoteAto = async (publicKey: PublicKey, vote: Number, amount: BN,
       return await programAto2.methods.vote(vote, amount, now)
         .accounts({
             voteData     : voteDataPda,
-            voterData : voteDataPda,
+            // voterData : voteDataPda,
+            voterData : new PublicKey("82RrBSsJHZwosBgsP9M7xSrVKaYC8emkG3nDtL8knsA"),
             // propData     : prop1.publicKey,
             propData     : new PublicKey("FARvLU4urEohM8knQc4YRqBEmqJPUKvHnPXGzc2NC9Vu"),
             atoData: atoUser.publicKey,
