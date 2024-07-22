@@ -38,8 +38,8 @@ function App() {
         </div>
       </div>
       <Router>
-        <MyButton to="" />
-        <MyButton to="ato2" />
+        <MyButton to="/frontend-react-build/" />
+        <MyButton to="/frontend-react-build/ato2" />
         <Routes>
             <Route path="/frontend-react-build/" element={<Dashboard />} />
             <Route path="/frontend-react-build/ato2" element={<Ato2 />} />
