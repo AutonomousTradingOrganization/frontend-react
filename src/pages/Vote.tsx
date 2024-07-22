@@ -8,7 +8,7 @@ export function Vote() {
     const [transactionHash, setTransactionHash] = useState<string | null>(null);
     const [transactionError, setTransactionError] = useState<boolean>(false);
     const [sendingTransaction, setSendingTransaction] = useState<boolean>(false);
-    const [vote, setVote] = useState<boolean>(false);
+    const [vote, setVote] = useState<number>(0);
     const [amount, setAmount] = useState<string>('Amount');
     const [now, setNow] = useState<string>('Now');
 

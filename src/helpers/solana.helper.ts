@@ -220,7 +220,7 @@ export const voterRegistrationAto = async (anchorWallet: AnchorWallet, name: str
     }
 };
 
-export const voteAto = async (anchorWallet: AnchorWallet, vote: boolean, amount: number, now: number): Promise<string | null> => {
+export const voteAto = async (anchorWallet: AnchorWallet, vote: number, amount: number, now: number): Promise<string | null> => {
     try {
       const accountTransaction = await getVoteAto(anchorWallet.publicKey, Boolean(vote), new BN(amount), new BN(now) );
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
@@ -610,7 +610,7 @@ export const getVoterRegistrationAto = async (publicKey: PublicKey, name: String
       }
 };
 
-export const getVoteAto = async (publicKey: PublicKey, vote: Boolean, amount: BN, now: BN): Promise<Transaction | null> => {
+export const getVoteAto = async (publicKey: PublicKey, vote: Number, amount: BN, now: BN): Promise<Transaction | null> => {
     try {
         const tailIndex = await programAto2.account.atoData.fetch(atoUser.publicKey);
         const tailIndexProposal = Number(tailIndex.proposalIndexTail);
