@@ -23,6 +23,7 @@ export function Dashboard() {
                         Connected to wallet: <b>{anchorWallet.publicKey.toBase58()}</b>
                         </p>
                         <AccountVoter />
+                        <Proposal />
                         <Ato2 />
                         <Ato />
                         <Authentication />

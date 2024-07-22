@@ -181,6 +181,25 @@ export const initializeAccount = async (anchorWallet: AnchorWallet, data: number
     }
 };
 
+export const createProposalAto = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+    try {
+      const accountTransaction = await getCreateProposalAto(anchorWallet.publicKey);
+      // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (accountTransaction && recentBlockhash) {
+          accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
 export const initializeAto2 = async (anchorWallet: AnchorWallet): Promise<string | null> => {
     try {
       const accountTransaction = await getInitializeAto2(anchorWallet.publicKey);
@@ -234,10 +253,14 @@ console.log(accountTransaction);
       const recentBlockhash = await getRecentBlockhash();
       if (accountTransaction && recentBlockhash) {
           console.log(accountTransaction);
-          accountTransaction.feePayer = anchorWallet.publicKey;
+        //   accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.feePayer = signUser.publicKey;
           accountTransaction.recentBlockhash = recentBlockhash;
-          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
-          return await connection.sendRawTransaction(signedTransaction.serialize());
+          accountTransaction.sign(signUser);
+          const signedTransaction = accountTransaction.serialize();
+          return await connection.sendRawTransaction(signedTransaction);
+        //   const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+        //   return await connection.sendRawTransaction(signedTransaction.serialize());
       }
       return null;
     } catch (error) {
@@ -476,6 +499,27 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
       }
 };
 
+export const getCreateProposalAto = async (publicKey: PublicKey): Promise<Transaction | null> => {
+    try {
+        const [atoPda] = PublicKey.findProgramAddressSync(
+        [
+          atoUser.publicKey.toBuffer()
+        ], 
+        new PublicKey(PROGRAM_ID_ATO2.toString())
+      );
+      return await programAto2.methods.initialize()
+        .accounts({
+            atoData: atoUser.publicKey,
+            signer: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
 export const getInitializeAto2 = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
         const atoDataPubkey = Keypair.generate();
@@ -537,14 +581,6 @@ export const getInitializeAto21 = async (publicKey: PublicKey): Promise<Transact
 
 export const getInitializeAto22 = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
-        // const atoDataPair = await new Keypair();
-        // console.log(atoDataPair);
-        // console.log(atoDataPair.publicKey);
-        // console.log(atoDataPair.publicKey.toString());
-        // let lbsol = await getSolanaBalance(atoDataPair.publicKey.toString());
-        // console.log(lbsol);
-        // let airdopNewAccount = await connection.requestAirdrop(atoDataPair.publicKey, LAMPORTS_PER_SOL);
-        // console.log(airdopNewAccount);
         const [atoPda] = PublicKey.findProgramAddressSync(
         [
           atoUser.publicKey.toBuffer()

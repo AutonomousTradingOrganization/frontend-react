@@ -2,6 +2,8 @@ import './App.css';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { Dashboard } from './pages/Dashboard';
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Ato2 from "./pages/Ato2";
 import { useWallet } from '@solana/wallet-adapter-react';
 import { getSolanaBalance } from './helpers/solana.helper';
 
@@ -34,6 +36,11 @@ function App() {
           <WalletMultiButton></WalletMultiButton>
         </div>
       </div>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/ato2"
+            element={<Ato2 />} />
+      </Routes>
       <Dashboard />
     </div>
   );
