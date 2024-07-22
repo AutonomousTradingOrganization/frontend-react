@@ -3,7 +3,7 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { Dashboard } from './pages/Dashboard';
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Ato2 from "./pages/Ato2";
+import { Ato2 } from "./pages/Ato2";
 import { useWallet } from '@solana/wallet-adapter-react';
 import { getSolanaBalance } from './helpers/solana.helper';
 
