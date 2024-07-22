@@ -82,6 +82,7 @@ const signUser: Signer = {
 }
 console.log("sign");
 console.log(signUser);
+
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
     const balanceInSol = balanceInLamports / LAMPORTS_PER_SOL;
@@ -501,14 +502,18 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
 
 export const getCreateProposalAto = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
-        const [atoPda] = PublicKey.findProgramAddressSync(
+        const proposalCreateSeed = Buffer.from("ATO_PROP"); 
+        const [propDataPda] = PublicKey.findProgramAddressSync(
         [
-          atoUser.publicKey.toBuffer()
+          proposalCreateSeed,
+          publicKey.toBuffer(),
+          new BN(2).toBuffer()
         ], 
         new PublicKey(PROGRAM_ID_ATO2.toString())
       );
       return await programAto2.methods.initialize()
         .accounts({
+            propData : propDataPda,
             atoData: atoUser.publicKey,
             signer: publicKey,
             systemProgram: SystemProgram.programId
