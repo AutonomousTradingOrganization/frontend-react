@@ -33,9 +33,9 @@ export function Vote() {
                         Amount
                     </label>
                     <input
-                        type="string"
+                        type="number"
                         value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
+                        onChange={(e) => setAmount(parseInt(e.target.value))}
                         placeholder="Name"
                     />
                 </div>
@@ -44,9 +44,9 @@ export function Vote() {
                         Now
                     </label>
                     <input
-                        type="string"
+                        type="number"
                         value={now}
-                        onChange={(e) => setNow(e.target.value)}
+                        onChange={(e) => setNow(parseInt(e.target.value))}
                         placeholder="Mail"
                     />
                 </div>
