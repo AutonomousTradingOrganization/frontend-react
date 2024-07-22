@@ -23,7 +23,7 @@ export function Dashboard() {
                     </div>
                 ) : (
                     <div>
-                    <h1>ATO : Autonomous Trading Organization</h1>
+                    <h1><img src="/logo512.png" />ATO : Autonomous Trading Organization</h1>
                     <p>
                         Cliquer sur le bouton "Connect Wallet" pour connecter votre wallet Solana a la dApp ATO.
                     </p>
