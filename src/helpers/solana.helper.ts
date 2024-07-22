@@ -220,6 +220,25 @@ export const voterRegistrationAto = async (anchorWallet: AnchorWallet, name: str
     }
 };
 
+export const voteAto = async (anchorWallet: AnchorWallet, vote: boolean, amount: number, now: number): Promise<string | null> => {
+    try {
+      const accountTransaction = await getVoteAto(anchorWallet.publicKey, Boolean(vote), new BN(amount), new BN(now) );
+      // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
+  
+      const recentBlockhash = await getRecentBlockhash();
+      if (accountTransaction && recentBlockhash) {
+          accountTransaction.feePayer = anchorWallet.publicKey;
+          accountTransaction.recentBlockhash = recentBlockhash;
+          const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
+          return await connection.sendRawTransaction(signedTransaction.serialize());
+      }
+      return null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+};
+
 export const initializeAto2 = async (anchorWallet: AnchorWallet): Promise<string | null> => {
     try {
       const accountTransaction = await getInitializeAto2(anchorWallet.publicKey);
@@ -580,6 +599,50 @@ export const getVoterRegistrationAto = async (publicKey: PublicKey, name: String
       return await programAto2.methods.voterRegistration(name, email)
         .accounts({
             voterData : voterDataPda,
+            atoData: atoUser.publicKey,
+            voter: publicKey,
+            systemProgram: SystemProgram.programId
+        })
+        .transaction()
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+};
+
+export const getVoteAto = async (publicKey: PublicKey, vote: Bool, amount: BN, now: BN): Promise<Transaction | null> => {
+    try {
+        const tailIndex = await programAto2.account.atoData.fetch(atoUser.publicKey);
+        const tailIndexProposal = Number(tailIndex.proposalIndexTail);
+        console.log(tailIndex);
+        console.log(tailIndexProposal);
+        const propsIndexBuffer = Buffer.allocUnsafe(2);
+        propsIndexBuffer.writeUInt16LE(tailIndexProposal, 0);
+        console.log(propsIndexBuffer);
+
+        const voteTailIndex = 0;
+        //console.log(tailIndex);
+        const voteIndexBuffer = Buffer.allocUnsafe(2);
+        voteIndexBuffer.writeUInt16LE(voteTailIndex, 0);
+
+        const allProposals = await programAto2.account.propData.all()
+        console.log("allProposals");
+        console.log(allProposals);
+        const voteSeed = Buffer.from("ATO_VOTE"); 
+        const [voteDataPda] = PublicKey.findProgramAddressSync(
+        [
+          voteSeed,
+          propsIndexBuffer,
+          voteIndexBuffer
+        //   new BN(2).toBuffer()
+        ], 
+        new PublicKey(PROGRAM_ID_ATO2.toString())
+      );
+      return await programAto2.methods.vote(vote, amount, now)
+        .accounts({
+            voteData     : voteDataPda,
+            voterData : voteDataPda,
+            propData     : prop1.publicKey,
             atoData: atoUser.publicKey,
             voter: publicKey,
             systemProgram: SystemProgram.programId

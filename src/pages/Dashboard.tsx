@@ -10,6 +10,7 @@ import { Ato } from "./Ato";
 import { Ato2 } from "./Ato2";
 import { Proposal } from "./Proposal";
 import { VoterRegistration } from "./VoterRegistration";
+import { Vote } from "./Vote";
 import { Swap } from "./Swap";
 
 export function Dashboard() {
@@ -27,6 +28,7 @@ export function Dashboard() {
                         <Proposal />
                         <VoterRegistration />
                         <AccountVoter />
+                        <Vote />
                         <Ato2 />
                         <Ato />
                         <Authentication />
