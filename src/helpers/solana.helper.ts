@@ -503,13 +503,13 @@ export const getInitializeAto21 = async (publicKey: PublicKey): Promise<Transact
 
         const [atoPda] = PublicKey.findProgramAddressSync(
         [
-          atoDataPair.publicKey.toBuffer()
+          atoUser.publicKey.toBuffer()
         ], 
         new PublicKey(PROGRAM_ID_ATO2.toString())
       );
       return await programAto2.methods.initialize()
         .accounts({
-            atoData: atoDataPair.publicKey,
+            atoData: atoUser.publicKey,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
@@ -522,17 +522,17 @@ export const getInitializeAto21 = async (publicKey: PublicKey): Promise<Transact
 
 export const getInitializeAto22 = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
-        const atoDataPair = await new Keypair();
-        console.log(atoDataPair);
-        console.log(atoDataPair.publicKey);
-        console.log(atoDataPair.publicKey.toString());
-        let lbsol = await getSolanaBalance(atoDataPair.publicKey.toString());
-        console.log(lbsol);
-        let airdopNewAccount = await connection.requestAirdrop(atoDataPair.publicKey, LAMPORTS_PER_SOL);
-        console.log(airdopNewAccount);
+        // const atoDataPair = await new Keypair();
+        // console.log(atoDataPair);
+        // console.log(atoDataPair.publicKey);
+        // console.log(atoDataPair.publicKey.toString());
+        // let lbsol = await getSolanaBalance(atoDataPair.publicKey.toString());
+        // console.log(lbsol);
+        // let airdopNewAccount = await connection.requestAirdrop(atoDataPair.publicKey, LAMPORTS_PER_SOL);
+        // console.log(airdopNewAccount);
         const [atoPda] = PublicKey.findProgramAddressSync(
         [
-          atoDataPair.publicKey.toBuffer()
+          atoUser.publicKey.toBuffer()
         ], 
         new PublicKey(PROGRAM_ID_ATO2.toString())
       );
