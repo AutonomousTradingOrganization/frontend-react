@@ -36,11 +36,14 @@ function App() {
           <WalletMultiButton></WalletMultiButton>
         </div>
       </div>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/ato2"
-            element={<Ato2 />} />
-      </Routes>
+      <Router>
+        <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/ato2"
+                element={<Ato2 />} />
+        </Routes>
+      </Router>
+
       <Dashboard />
     </div>
   );
