@@ -66,8 +66,11 @@ const programAto2 = new Program<Idl>(IDLAto2 as Idl, PROGRAM_ID_ATO2, {
 
 const atoUser = Keypair.fromSecretKey(Uint8Array.from([131,118,141,236,168,118,207,212,69,123,27,98,244,137,48,59,140,58,63,251,172,114,84,95,124,20,197,204,153,230,204,7,233,249,47,75,220,170,231,208,140,129,190,253,66,143,19,33,152,213,9,250,148,238,163,41,87,228,15,134,164,29,248,177]));
 console.log(atoUser);
+console.log(atoUser.publicKey);
 console.log(atoUser.publicKey.toString());
 //GkLNgapZctZgt4sdjA2UK8gQedjz7cq7NcjVUToXwKqz
+let lbsol = await getSolanaBalance(atoUser.publicKey.toString());
+console.log(lbsol);
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
     const balanceInSol = balanceInLamports / LAMPORTS_PER_SOL;
