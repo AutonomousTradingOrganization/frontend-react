@@ -512,7 +512,7 @@ export const getCreateProposalAto = async (publicKey: PublicKey, title: String, 
         ], 
         new PublicKey(PROGRAM_ID_ATO2.toString())
       );
-      return await programAto2.methods.proposal_create(title, description, mode, threshold, deadline)
+      return await programAto2.methods.proposalCreate(title, description, mode, threshold, deadline)
         .accounts({
             propData : propDataPda,
             atoData: atoUser.publicKey,
