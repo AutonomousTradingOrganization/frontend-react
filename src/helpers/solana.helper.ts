@@ -614,12 +614,20 @@ export const getVoteAto = async (publicKey: PublicKey, vote: Number, amount: BN,
     try {
         const tailIndex = await programAto2.account.atoData.fetch(atoUser.publicKey);
         const tailIndexProposal = Number(tailIndex.proposalIndexTail);
+        console.log("tailIndex");
         console.log(tailIndex);
         console.log(tailIndexProposal);
+        console.log(tailIndexProposal.status);
+        console.log(tailIndexProposal.proposalIndexHead);
+        console.log(tailIndexProposal.proposalIndexTail);
+        console.log(tailIndexProposal.voterIndexTail);
+        console.log(tailIndexProposal.voterIndexHead);
         const propsIndexBuffer = Buffer.allocUnsafe(2);
         propsIndexBuffer.writeUInt16LE(tailIndexProposal, 0);
         console.log("propsIndexBuffer");
         console.log(propsIndexBuffer);
+        console.log(propsIndexBuffer[0]);
+        console.log(propsIndexBuffer[1]);
 
         const voteTailIndex = 0;
         //console.log(tailIndex);
