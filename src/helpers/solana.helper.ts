@@ -191,9 +191,10 @@ export const initializeAto22 = async (anchorWallet: AnchorWallet): Promise<strin
     try {
       const accountTransaction = await getInitializeAto22(anchorWallet.publicKey);
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
-  
+
       const recentBlockhash = await getRecentBlockhash();
       if (accountTransaction && recentBlockhash) {
+          console.log(accountTransaction);
           accountTransaction.feePayer = anchorWallet.publicKey;
           accountTransaction.recentBlockhash = recentBlockhash;
           const signedTransaction = await anchorWallet.signTransaction(accountTransaction);
@@ -484,11 +485,10 @@ export const getInitializeAto21 = async (publicKey: PublicKey): Promise<Transact
       );
       return await programAto2.methods.initialize()
         .accounts({
-            atoData: atoPda,
+            atoData: atoDataPair.publicKey,
             signer: publicKey,
             systemProgram: SystemProgram.programId
         })
-        .signers([atoDataPair])
         .transaction()
       } catch (error) {
         console.error(error);
@@ -498,11 +498,12 @@ export const getInitializeAto21 = async (publicKey: PublicKey): Promise<Transact
 
 export const getInitializeAto22 = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
-        const atoDataPair = new Keypair();
+        const atoDataPair = await new Keypair();
         console.log(atoDataPair);
         console.log(atoDataPair.publicKey);
         console.log(atoDataPair.publicKey.toString());
-
+        let lbsol = await getSolanaBalance(atoDataPair.publicKey.toString());
+        console.log(lbsol);
         const [atoPda] = PublicKey.findProgramAddressSync(
         [
           atoDataPair.publicKey.toBuffer()
