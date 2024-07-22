@@ -28,7 +28,9 @@ root.render(
     >
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
-          <App />
+            <HashRouter>
+                <App />
+            </HashRouter>
         </WalletModalProvider>
       </WalletProvider>
     </TipLinkWalletAutoConnect>

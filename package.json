@@ -1,7 +1,7 @@
 {
   "name": "alyra-react",
   "version": "0.1.0",
-  "homepage": "/frontend-react-build/#",
+  "homepage": "https://autonomoustradingorganization.github.io/frontend-react-build",
   "private": true,
   "dependencies": {
     "@coral-xyz/anchor": "0.29.0",
