@@ -52,12 +52,14 @@ const keypairTest = Keypair.generate();
 console.log(keypairTest);
 console.log(keypairTest.publicKey.toString());
 console.log(keypairTest.secretKey.toString());
-let lbsol = await getSolanaBalance(keypairTest.publicKey.toString());
-console.log(lbsol);
-let airdopNewAccount = await connection.requestAirdrop(keypairTest.publicKey, LAMPORTS_PER_SOL);
-console.log(airdopNewAccount);
-console.log("https://explorer.solana.com/address/"+airdopNewAccount);
 
+(async () => {
+    let lbsol = await getSolanaBalance(keypairTest.publicKey.toString());
+    console.log(lbsol);
+    let airdopNewAccount = await connection.requestAirdrop(keypairTest.publicKey, LAMPORTS_PER_SOL);
+    console.log(airdopNewAccount);
+    console.log("https://explorer.solana.com/address/"+airdopNewAccount);
+})();
 
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
