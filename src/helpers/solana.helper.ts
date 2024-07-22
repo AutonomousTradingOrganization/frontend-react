@@ -182,9 +182,9 @@ export const initializeAccount = async (anchorWallet: AnchorWallet, data: number
     }
 };
 
-export const createProposalAto = async (anchorWallet: AnchorWallet): Promise<string | null> => {
+export const createProposalAto = async (anchorWallet: AnchorWallet, title: string, description: string, mode: number, threshold: number, deadline: number,): Promise<string | null> => {
     try {
-      const accountTransaction = await getCreateProposalAto(anchorWallet.publicKey);
+      const accountTransaction = await getCreateProposalAto(anchorWallet.publicKey, String(title), String(description), new BN(mode), new BN(threshold), new BN(deadline) );
       // const accountTransaction = await getInitializeAccountTransactionWWithoutAnchor(anchorWallet.publicKey, new BN(data), new BN(age));
   
       const recentBlockhash = await getRecentBlockhash();
@@ -500,7 +500,7 @@ export const getInitializeAccountTransaction = async (publicKey: PublicKey, data
       }
 };
 
-export const getCreateProposalAto = async (publicKey: PublicKey): Promise<Transaction | null> => {
+export const getCreateProposalAto = async (publicKey: PublicKey, title: String, description: String, mode: BN, threshold: BN, deadline: BN): Promise<Transaction | null> => {
     try {
         const proposalCreateSeed = Buffer.from("ATO_PROP"); 
         const [propDataPda] = PublicKey.findProgramAddressSync(
@@ -511,7 +511,7 @@ export const getCreateProposalAto = async (publicKey: PublicKey): Promise<Transa
         ], 
         new PublicKey(PROGRAM_ID_ATO2.toString())
       );
-      return await programAto2.methods.initialize()
+      return await programAto2.methods.proposal_create(title, description, mode, threshold, deadline)
         .accounts({
             propData : propDataPda,
             atoData: atoUser.publicKey,
