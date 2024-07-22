@@ -47,7 +47,7 @@ export function VoterRegistration() {
                             onClick={async () => {
                                 if (anchorWallet.publicKey) {
                                     setSendingTransaction(true);
-                                    const initResult = await voterRegistrationAto(anchorWallet, name, mail);
+                                    const initResult = await voterRegistrationAto(anchorWallet, name, email);
                                     setTransactionHash(initResult);
                                     setSendingTransaction(false);
                                     console.log("initResult");
