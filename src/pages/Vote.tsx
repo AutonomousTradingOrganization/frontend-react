@@ -25,7 +25,7 @@ export function Vote() {
                     <input
                         type="number"
                         value={vote}
-                        onChange={(e) => setVote(e.target.value)}   
+                        onChange={(e) => setVote(parseInt(e.target.value))}   
                     />
                 </div>
                 <div>
