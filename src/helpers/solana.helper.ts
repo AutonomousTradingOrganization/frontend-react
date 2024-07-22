@@ -64,7 +64,7 @@ const programAto2 = new Program<Idl>(IDLAto2 as Idl, PROGRAM_ID_ATO2, {
 //     console.log(airdopNewAccount2);
 // })();
 
-const seed = new Uint8Array(131,118,141,236,168,118,207,212,69,123,27,98,244,137,48,59,140,58,63,251,172,114,84,95,124,20,197,204,153,230,204,7,233,249,47,75,220,170,231,208,140,129,190,253,66,143,19,33,152,213,9,250,148,238,163,41,87,228,15,134,164,29,248,177]);
+const seed = new Uint8Array([131,118,141,236,168,118,207,212,69,123,27,98,244,137,48,59,140,58,63,251,172,114,84,95,124,20,197,204,153,230,204,7,233,249,47,75,220,170,231,208,140,129,190,253,66,143,19,33,152,213,9,250,148,238,163,41,87,228,15,134,164,29,248,177]);
 
 const atoUser = Keypair.fromSecretKey(seed);
 console.log(atoUser);
@@ -76,11 +76,12 @@ console.log(atoUser.publicKey.toString());
     console.log(lbsol);
 })();
 
-const sign: Signer = {
+const signUser: Signer = {
     publicKey: atoUser.publicKey,
     secretKey: seed
 }
-console.log(sign);
+console.log("sign");
+console.log(signUser);
 export async function getSolanaBalance(publicKey: string): Promise<number> {
     const balanceInLamports = await connection.getBalance(new PublicKey(publicKey));
     const balanceInSol = balanceInLamports / LAMPORTS_PER_SOL;
@@ -505,10 +506,10 @@ export const getInitializeAto2 = async (publicKey: PublicKey): Promise<Transacti
 export const getInitializeAto21 = async (publicKey: PublicKey): Promise<Transaction | null> => {
     try {
 
-        const atoDataPair = new Keypair();
-        console.log(atoDataPair);
-        console.log(atoDataPair.publicKey);
-        console.log(atoDataPair.publicKey.toString());
+        // const atoDataPair = new Keypair();
+        // console.log(atoDataPair);
+        // console.log(atoDataPair.publicKey);
+        // console.log(atoDataPair.publicKey.toString());
 
         const [atoPda] = PublicKey.findProgramAddressSync(
         [
