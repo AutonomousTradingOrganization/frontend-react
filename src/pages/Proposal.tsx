@@ -8,8 +8,8 @@ export function Proposal() {
     const [transactionHash, setTransactionHash] = useState<string | null>(null);
     const [transactionError, setTransactionError] = useState<boolean>(false);
     const [sendingTransaction, setSendingTransaction] = useState<boolean>(false);
-    const [title, setTitle] = useState<string>('name');
-    const [description, setDescription] = useState<string>('mail');
+    const [title, setTitle] = useState<string>('title');
+    const [description, setDescription] = useState<string>('description');
     const [mode, setMode] = useState<number>(0);
     const [threshold, setThreshold] = useState<number>(0);
     const [deadline, setDeadline] = useState<number>(0);
@@ -28,7 +28,7 @@ export function Proposal() {
                         type="string"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        placeholder="Mail"
+                        placeholder="Title"
                     />
                 </div>
                 <div>
@@ -39,7 +39,7 @@ export function Proposal() {
                         type="string"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        placeholder="Mail"
+                        placeholder="Description"
                     />
                 </div>
                 <div>
@@ -50,7 +50,7 @@ export function Proposal() {
                         type="number"
                         value={mode}
                         onChange={(e) => setMode(parseInt(e.target.value))}
-                        placeholder="Mail"
+                        placeholder="Mode"
                     />
                 </div>
                 <div>
@@ -61,7 +61,7 @@ export function Proposal() {
                         type="number"
                         value={threshold}
                         onChange={(e) => setThreshold(parseInt(e.target.value))}
-                        placeholder="Mail"
+                        placeholder="Threshold"
                     />
                 </div>
                 <div>
@@ -72,7 +72,7 @@ export function Proposal() {
                         type="number"
                         value={deadline}
                         onChange={(e) => setDeadline(parseInt(e.target.value))}
-                        placeholder="Mail"
+                        placeholder="Deadline"
                     />
                 </div>
             </div>
