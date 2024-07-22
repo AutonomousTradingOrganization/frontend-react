@@ -6,6 +6,7 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { TipLinkWalletAutoConnect } from '@tiplink/wallet-adapter-react-ui';
 import { registerTipLinkWallet } from '@tiplink/wallet-adapter';
+import { HashRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
